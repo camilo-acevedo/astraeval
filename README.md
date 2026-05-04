@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/astraea-icon.svg" alt="Astraea" width="160" height="160">
+</p>
+
 # astraea
 
 > **Audit-grade LLM evaluation for Python.** Reproducible runs, prompt hashing, SQLite caching, and a CI gate that fails PRs when metrics regress.
