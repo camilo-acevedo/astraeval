@@ -6,7 +6,7 @@
 
 > **Audit-grade LLM evaluation for Python.** Reproducible runs, prompt hashing, SQLite caching, and a CI gate that fails PRs when metrics regress.
 
-[![CI](https://github.com/camilo-acevedo/astraea/actions/workflows/ci.yml/badge.svg)](https://github.com/camilo-acevedo/astraea/actions/workflows/ci.yml)
+[![CI](https://github.com/camilo-acevedo/astraeval/actions/workflows/ci.yml/badge.svg)](https://github.com/camilo-acevedo/astraeval/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Type-checked: mypy strict](https://img.shields.io/badge/type--checked-mypy_strict-2b6cb0.svg)](pyproject.toml)
@@ -137,8 +137,8 @@ of the box, DeepEval or Ragas are better choices.
 Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-git clone https://github.com/camilo-acevedo/astraea.git
-cd astraea
+git clone https://github.com/camilo-acevedo/astraeval.git
+cd astraeval
 uv sync --all-extras
 
 uv run astraeval run examples/configs/qa_rag_en.yaml
@@ -169,8 +169,8 @@ The committed reference run lives at
 ### From source (current)
 
 ```bash
-git clone https://github.com/camilo-acevedo/astraea.git
-cd astraea
+git clone https://github.com/camilo-acevedo/astraeval.git
+cd astraeval
 uv sync --all-extras   # or: pip install -e ".[all]"
 ```
 
@@ -190,10 +190,9 @@ demos) is usable.
 
 ### From PyPI
 
-Not yet published. Until then, install from a Git tag:
-
 ```bash
-pip install git+https://github.com/camilo-acevedo/astraea.git@v0.5.0
+pip install astraeval               # core only
+pip install 'astraeval[all]'        # with every provider extra
 ```
 
 ---
@@ -618,8 +617,8 @@ For comparing a PR against `main`:
 ## Development
 
 ```bash
-git clone https://github.com/camilo-acevedo/astraea.git
-cd astraea
+git clone https://github.com/camilo-acevedo/astraeval.git
+cd astraeval
 uv sync --all-extras
 uv run pre-commit install
 ```

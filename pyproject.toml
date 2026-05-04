@@ -26,9 +26,9 @@ ollama = ["ollama>=0.4.0"]
 all = ["anthropic>=0.40.0", "openai>=1.50.0", "ollama>=0.4.0"]
 
 [project.urls]
-Homepage = "https://github.com/camilo-acevedo/astraea"
-Repository = "https://github.com/camilo-acevedo/astraea"
-Issues = "https://github.com/camilo-acevedo/astraea/issues"
+Homepage = "https://github.com/camilo-acevedo/astraeval"
+Repository = "https://github.com/camilo-acevedo/astraeval"
+Issues = "https://github.com/camilo-acevedo/astraeval/issues"
 
 [project.scripts]
 astraeval = "astraeval.cli:main"
