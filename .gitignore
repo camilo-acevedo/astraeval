@@ -85,8 +85,7 @@ dmypy.json
 # Run artifacts
 runs/
 *.manifest.json
-reports/
-!src/**/reports/
+/reports/
 
 # Secrets
 .secrets

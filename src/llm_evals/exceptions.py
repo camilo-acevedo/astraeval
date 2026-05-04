@@ -21,3 +21,11 @@ class DatasetError(LLMEvalsError):
 
 class MetricError(LLMEvalsError):
     """Raised when a metric cannot evaluate the inputs it was given."""
+
+
+class ConfigError(LLMEvalsError):
+    """Raised when a YAML or programmatic configuration is invalid."""
+
+
+class ThresholdError(LLMEvalsError):
+    """Raised by the CLI when one or more metric thresholds were violated."""
