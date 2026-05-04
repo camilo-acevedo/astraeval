@@ -1,0 +1,28 @@
+provider:
+  type: fake
+  model: demo-model
+  responses:
+    - "Large Language Model"
+    - "OpenAI in 2017"
+    - "October 2018"
+    - "Controls randomness in output"
+    - "Retrieval-Augmented Generation"
+
+dataset:
+  type: jsonl
+  path: examples/datasets/qa_rag_en.jsonl
+
+cache:
+  enabled: false
+
+metrics:
+  - type: exact_match
+  - type: hallucination_flag
+
+thresholds:
+  exact_match: 0.5
+  hallucination_flag: 0.85
+
+output:
+  dir: examples/output/qa_rag_en
+  formats: [json, html]

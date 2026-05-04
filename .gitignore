@@ -82,9 +82,8 @@ dmypy.json
 *.sqlite
 *.sqlite3
 *.db
-# Run artifacts
-runs/
-*.manifest.json
+# Run artifacts (top-level only; examples/output is committed)
+/runs/
 /reports/
 
 # Secrets

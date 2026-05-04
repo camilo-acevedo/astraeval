@@ -1,0 +1,18 @@
+{
+  "dataset_hash": "980798900d6b763a44dd9cc35784c6f5a9b173f51b36baa335e61517ea60781d",
+  "finished_at": "2026-05-04T21:45:28+00:00",
+  "metric_names": [
+    "exact_match",
+    "hallucination_flag"
+  ],
+  "model": "demo-model",
+  "params_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "provider": "fake",
+  "run_id": "33618d875e28360d",
+  "sample_count": 5,
+  "started_at": "2026-05-04T21:45:28+00:00",
+  "summary": {
+    "exact_match": 0.4,
+    "hallucination_flag": 0.9
+  }
+}

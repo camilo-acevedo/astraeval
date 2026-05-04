@@ -1,0 +1,24 @@
+provider:
+  type: fake
+  model: demo-model
+  responses:
+    - "Anthropic released Claude 4.7 in May 2026 with three tiers (Opus, Sonnet, Haiku) tuned for cost and latency."
+    - "The EU AI Act took effect in 2024 with phased deadlines and fines up to 7% of global turnover for high-risk systems."
+    - "RAG injects retrieved evidence into prompts and depends on chunker, embedder, and vector store quality."
+
+dataset:
+  type: jsonl
+  path: examples/datasets/summarization.jsonl
+
+cache:
+  enabled: false
+
+metrics:
+  - type: hallucination_flag
+
+thresholds:
+  hallucination_flag: 0.9
+
+output:
+  dir: examples/output/summarization
+  formats: [json, html]

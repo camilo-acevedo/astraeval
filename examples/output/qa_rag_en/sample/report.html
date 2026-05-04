@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>llm-evals run 33618d875e28360d</title><style>
+:root {
+  color-scheme: light dark;
+  --bg: #0f1115;
+  --panel: #161922;
+  --panel-2: #1d2230;
+  --border: #2a3040;
+  --text: #e8ebf1;
+  --muted: #97a2b8;
+  --good: #22c55e;
+  --ok: #eab308;
+  --bad: #ef4444;
+  --link: #60a5fa;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+}
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 18px 24px;
+  background: var(--panel);
+}
+header h1 { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
+header .meta { color: var(--muted); font-size: 13px; font-family: var(--mono); }
+main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+section { margin-bottom: 32px; }
+section > h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+th, td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+tr:last-child td { border-bottom: none; }
+th { color: var(--muted); font-weight: 500; background: var(--panel-2); }
+.score {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+.score-good { background: rgba(34,197,94,0.15); color: var(--good); }
+.score-ok   { background: rgba(234,179,8,0.15);  color: var(--ok); }
+.score-bad  { background: rgba(239,68,68,0.15);  color: var(--bad); }
+details.sample {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+details.sample[open] { background: var(--panel-2); }
+details.sample > summary {
+  cursor: pointer;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  list-style: none;
+}
+details.sample > summary::-webkit-details-marker { display: none; }
+details.sample > summary::before {
+  content: "\203A";
+  color: var(--muted);
+  transition: transform 0.15s;
+}
+details.sample[open] > summary::before { transform: rotate(90deg); }
+.idx {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.input-preview {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.scores { display: flex; gap: 6px; flex-shrink: 0; }
+.body { padding: 0 16px 16px 30px; }
+.field { margin-top: 14px; }
+.field > h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+.field pre {
+  font-family: var(--mono);
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 0;
+}
+.context-block {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  white-space: pre-wrap;
+}
+.context-index { color: var(--muted); margin-right: 8px; }
+.empty { color: var(--muted); font-style: italic; }
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f7f8fa;
+    --panel: #ffffff;
+    --panel-2: #f0f2f6;
+    --border: #d8dde6;
+    --text: #1a1c23;
+    --muted: #5b6478;
+  }
+}
+</style></head><body><header><h1>Run 33618d875e28360d</h1><div class="meta">fake / demo-model &middot; 5 samples &middot; 2026-05-04T21:45:28+00:00</div></header><main><section id="summary"><h2>Summary</h2><table><thead><tr><th>Metric</th><th>Score</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-bad">0.400</span></td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-good">0.900</span></td></tr></tbody></table></section><section id="samples"><h2>Samples</h2><details class="sample"><summary><span class="idx">#0</span><span class="input-preview">What does LLM stand for?</span><span class="scores"><span class="score score score-good" title="exact_match">1.00</span><span class="score score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>What does LLM stand for?</pre></div><div class="field"><h3>Expected</h3><pre>Large Language Model</pre></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>A Large Language Model (LLM) is a type of neural network trained on vast amounts of text data.</div></div><div class="field"><h3>Response</h3><pre>Large Language Model</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-good">1.000</span></td><td>match</td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-good">1.000</span></td><td>All extracted tokens found in context.</td></tr></tbody></table></div></div></details>
+<details class="sample"><summary><span class="idx">#1</span><span class="input-preview">Who introduced the Transformer architecture?</span><span class="scores"><span class="score score score-bad" title="exact_match">0.00</span><span class="score score score-ok" title="hallucination_flag">0.50</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>Who introduced the Transformer architecture?</pre></div><div class="field"><h3>Expected</h3><pre>Google</pre></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>The Transformer architecture was introduced in the paper &#x27;Attention is All You Need&#x27; by researchers at Google in 2017.</div></div><div class="field"><h3>Response</h3><pre>OpenAI in 2017</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-bad">0.000</span></td><td>mismatch</td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-ok">0.500</span></td><td>1/2 tokens not found in context.</td></tr></tbody></table></div></div></details>
+<details class="sample"><summary><span class="idx">#2</span><span class="input-preview">When was BERT first released?</span><span class="scores"><span class="score score score-bad" title="exact_match">0.00</span><span class="score score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>When was BERT first released?</pre></div><div class="field"><h3>Expected</h3><pre>2018</pre></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>BERT was released by Google in October 2018, becoming a foundational model for downstream NLP tasks.</div></div><div class="field"><h3>Response</h3><pre>October 2018</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-bad">0.000</span></td><td>mismatch</td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-good">1.000</span></td><td>All extracted tokens found in context.</td></tr></tbody></table></div></div></details>
+<details class="sample"><summary><span class="idx">#3</span><span class="input-preview">What does the temperature parameter control in an LLM?</span><span class="scores"><span class="score score score-bad" title="exact_match">0.00</span><span class="score score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>What does the temperature parameter control in an LLM?</pre></div><div class="field"><h3>Expected</h3><pre>Controls randomness</pre></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>Temperature is a hyperparameter that controls the randomness of LLM outputs. Lower values yield more deterministic responses.</div></div><div class="field"><h3>Response</h3><pre>Controls randomness in output</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-bad">0.000</span></td><td>mismatch</td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-good">1.000</span></td><td>All extracted tokens found in context.</td></tr></tbody></table></div></div></details>
+<details class="sample"><summary><span class="idx">#4</span><span class="input-preview">What does RAG stand for?</span><span class="scores"><span class="score score score-good" title="exact_match">1.00</span><span class="score score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>What does RAG stand for?</pre></div><div class="field"><h3>Expected</h3><pre>Retrieval-Augmented Generation</pre></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>RAG (Retrieval-Augmented Generation) combines retrieval of relevant documents with text generation to ground LLM responses in external knowledge.</div></div><div class="field"><h3>Response</h3><pre>Retrieval-Augmented Generation</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-good">1.000</span></td><td>match</td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-good">1.000</span></td><td>All extracted tokens found in context.</td></tr></tbody></table></div></div></details></section></main></body></html>

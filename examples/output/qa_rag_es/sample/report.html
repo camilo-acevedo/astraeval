@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>llm-evals run 14bde8cfdbc6df10</title><style>
+:root {
+  color-scheme: light dark;
+  --bg: #0f1115;
+  --panel: #161922;
+  --panel-2: #1d2230;
+  --border: #2a3040;
+  --text: #e8ebf1;
+  --muted: #97a2b8;
+  --good: #22c55e;
+  --ok: #eab308;
+  --bad: #ef4444;
+  --link: #60a5fa;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Consolas, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+}
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 18px 24px;
+  background: var(--panel);
+}
+header h1 { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
+header .meta { color: var(--muted); font-size: 13px; font-family: var(--mono); }
+main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+section { margin-bottom: 32px; }
+section > h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+th, td {
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+tr:last-child td { border-bottom: none; }
+th { color: var(--muted); font-weight: 500; background: var(--panel-2); }
+.score {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+.score-good { background: rgba(34,197,94,0.15); color: var(--good); }
+.score-ok   { background: rgba(234,179,8,0.15);  color: var(--ok); }
+.score-bad  { background: rgba(239,68,68,0.15);  color: var(--bad); }
+details.sample {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+details.sample[open] { background: var(--panel-2); }
+details.sample > summary {
+  cursor: pointer;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  list-style: none;
+}
+details.sample > summary::-webkit-details-marker { display: none; }
+details.sample > summary::before {
+  content: "\203A";
+  color: var(--muted);
+  transition: transform 0.15s;
+}
+details.sample[open] > summary::before { transform: rotate(90deg); }
+.idx {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.input-preview {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.scores { display: flex; gap: 6px; flex-shrink: 0; }
+.body { padding: 0 16px 16px 30px; }
+.field { margin-top: 14px; }
+.field > h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+.field pre {
+  font-family: var(--mono);
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin: 0;
+}
+.context-block {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  white-space: pre-wrap;
+}
+.context-index { color: var(--muted); margin-right: 8px; }
+.empty { color: var(--muted); font-style: italic; }
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f7f8fa;
+    --panel: #ffffff;
+    --panel-2: #f0f2f6;
+    --border: #d8dde6;
+    --text: #1a1c23;
+    --muted: #5b6478;
+  }
+}
+</style></head><body><header><h1>Run 14bde8cfdbc6df10</h1><div class="meta">fake / demo-model &middot; 5 samples &middot; 2026-05-04T21:45:36+00:00</div></header><main><section id="summary"><h2>Summary</h2><table><thead><tr><th>Metric</th><th>Score</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-good">0.800</span></td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-good">0.800</span></td></tr></tbody></table></section><section id="samples"><h2>Samples</h2><details class="sample"><summary><span class="idx">#0</span><span class="input-preview">¿Qué significa LLM?</span><span class="scores"><span class="score score score-good" title="exact_match">1.00</span><span class="score score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>¿Qué significa LLM?</pre></div><div class="field"><h3>Expected</h3><pre>Modelo de Lenguaje Grande</pre></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>Un Modelo de Lenguaje Grande (LLM) es una red neuronal entrenada con grandes cantidades de texto.</div></div><div class="field"><h3>Response</h3><pre>Modelo de Lenguaje Grande</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-good">1.000</span></td><td>match</td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-good">1.000</span></td><td>All extracted tokens found in context.</td></tr></tbody></table></div></div></details>
+<details class="sample"><summary><span class="idx">#1</span><span class="input-preview">¿En qué año se publicó el paper de Transformers?</span><span class="scores"><span class="score score score-good" title="exact_match">1.00</span><span class="score score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>¿En qué año se publicó el paper de Transformers?</pre></div><div class="field"><h3>Expected</h3><pre>2017</pre></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>El paper &#x27;Attention is All You Need&#x27;, que introdujo la arquitectura Transformer, fue publicado por investigadores de Google en 2017.</div></div><div class="field"><h3>Response</h3><pre>2017</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-good">1.000</span></td><td>match</td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-good">1.000</span></td><td>All extracted tokens found in context.</td></tr></tbody></table></div></div></details>
+<details class="sample"><summary><span class="idx">#2</span><span class="input-preview">¿Qué es la temperatura en un LLM?</span><span class="scores"><span class="score score score-good" title="exact_match">1.00</span><span class="score score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>¿Qué es la temperatura en un LLM?</pre></div><div class="field"><h3>Expected</h3><pre>Controla la aleatoriedad</pre></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>La temperatura es un hiperparámetro que controla la aleatoriedad de las respuestas. Valores bajos producen salidas más deterministas.</div></div><div class="field"><h3>Response</h3><pre>Controla la aleatoriedad</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-good">1.000</span></td><td>match</td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-good">1.000</span></td><td>All extracted tokens found in context.</td></tr></tbody></table></div></div></details>
+<details class="sample"><summary><span class="idx">#3</span><span class="input-preview">¿Para qué sirve RAG?</span><span class="scores"><span class="score score score-good" title="exact_match">1.00</span><span class="score score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>¿Para qué sirve RAG?</pre></div><div class="field"><h3>Expected</h3><pre>Generación Aumentada por Recuperación</pre></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>RAG (Generación Aumentada por Recuperación) combina la recuperación de documentos relevantes con la generación de texto para anclar las respuestas en conocimiento externo.</div></div><div class="field"><h3>Response</h3><pre>Generación Aumentada por Recuperación</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-good">1.000</span></td><td>match</td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-good">1.000</span></td><td>All extracted tokens found in context.</td></tr></tbody></table></div></div></details>
+<details class="sample"><summary><span class="idx">#4</span><span class="input-preview">¿Quién creó la arquitectura BERT?</span><span class="scores"><span class="score score score-bad" title="exact_match">0.00</span><span class="score score score-bad" title="hallucination_flag">0.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>¿Quién creó la arquitectura BERT?</pre></div><div class="field"><h3>Expected</h3><pre>Google</pre></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>BERT fue presentado por Google en octubre de 2018 y se convirtió en un modelo fundacional para tareas de NLP.</div></div><div class="field"><h3>Response</h3><pre>Microsoft</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>exact_match</td><td><span class="score score-bad">0.000</span></td><td>mismatch</td></tr>
+<tr><td>hallucination_flag</td><td><span class="score score-bad">0.000</span></td><td>1/1 tokens not found in context.</td></tr></tbody></table></div></div></details></section></main></body></html>

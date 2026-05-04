@@ -1,0 +1,5 @@
+{"input": "¿Qué significa LLM?", "expected": "Modelo de Lenguaje Grande", "context": ["Un Modelo de Lenguaje Grande (LLM) es una red neuronal entrenada con grandes cantidades de texto."]}
+{"input": "¿En qué año se publicó el paper de Transformers?", "expected": "2017", "context": ["El paper 'Attention is All You Need', que introdujo la arquitectura Transformer, fue publicado por investigadores de Google en 2017."]}
+{"input": "¿Qué es la temperatura en un LLM?", "expected": "Controla la aleatoriedad", "context": ["La temperatura es un hiperparámetro que controla la aleatoriedad de las respuestas. Valores bajos producen salidas más deterministas."]}
+{"input": "¿Para qué sirve RAG?", "expected": "Generación Aumentada por Recuperación", "context": ["RAG (Generación Aumentada por Recuperación) combina la recuperación de documentos relevantes con la generación de texto para anclar las respuestas en conocimiento externo."]}
+{"input": "¿Quién creó la arquitectura BERT?", "expected": "Google", "context": ["BERT fue presentado por Google en octubre de 2018 y se convirtió en un modelo fundacional para tareas de NLP."]}

@@ -1,0 +1,28 @@
+provider:
+  type: fake
+  model: demo-model
+  responses:
+    - "Modelo de Lenguaje Grande"
+    - "2017"
+    - "Controla la aleatoriedad"
+    - "Generación Aumentada por Recuperación"
+    - "Microsoft"
+
+dataset:
+  type: jsonl
+  path: examples/datasets/qa_rag_es.jsonl
+
+cache:
+  enabled: false
+
+metrics:
+  - type: exact_match
+  - type: hallucination_flag
+
+thresholds:
+  exact_match: 0.7
+  hallucination_flag: 0.8
+
+output:
+  dir: examples/output/qa_rag_es
+  formats: [json, html]

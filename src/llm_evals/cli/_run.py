@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import sys
 from collections.abc import Mapping
 from dataclasses import replace
 from pathlib import Path
@@ -136,8 +135,6 @@ def _print_summary(
             status = "[FAIL]" if metric_name in failing else "[OK]"
         print(f"  {metric_name.ljust(width)}  {score:.3f}  {status}".rstrip())
     print(f"Reports written to {run_dir}")
-    if failures:
-        print(_format_failures(failures), file=sys.stderr)
 
 
 def _format_failures(failures: list[str]) -> str:
