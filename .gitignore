@@ -89,3 +89,6 @@ dmypy.json
 # Secrets
 .secrets
 secrets.json
+
+# Claude Code local state
+.claude/
