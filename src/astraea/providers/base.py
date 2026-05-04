@@ -1,4 +1,4 @@
-"""Abstract :class:`Provider` interface and request-key utility."""
+"""Abstract :class:`Provider` interface and request-hashing utility."""
 
 from __future__ import annotations
 
@@ -50,19 +50,19 @@ class Provider(ABC):
         """
 
 
-def request_key(
+def hash_request(
     *,
     provider: str,
     model: str,
     prompt: str,
     params: Mapping[str, Any],
 ) -> str:
-    """Compute a stable SHA-256 key for a completion request.
+    """Compute a stable SHA-256 hash for a completion request.
 
-    The resulting key is independent of dictionary insertion order and only
-    changes when the prompt, model, provider, or any forwarded parameter
-    changes. It is intended to serve as the primary key for the on-disk
-    request cache.
+    The resulting digest is independent of dictionary insertion order and
+    only changes when the prompt, model, provider, or any forwarded
+    parameter changes. It is intended to serve as the primary key for the
+    on-disk request cache.
 
     :param provider: Provider name as exposed via :attr:`Provider.name`.
     :type provider: str

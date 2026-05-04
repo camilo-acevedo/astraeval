@@ -6,7 +6,7 @@ from typing import Any
 
 from astraea.core.cache import Cache
 from astraea.core.types import Response
-from astraea.providers.base import Provider, request_key
+from astraea.providers.base import Provider, hash_request
 
 
 class CachedProvider(Provider):
@@ -50,7 +50,7 @@ class CachedProvider(Provider):
         :returns: Either the cached response or a freshly produced one.
         :rtype: Response
         """
-        key = request_key(
+        key = hash_request(
             provider=self._inner.name,
             model=model,
             prompt=prompt,

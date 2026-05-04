@@ -55,8 +55,8 @@ class Cache:
     def get(self, key: str) -> Response | None:
         """Look up a cached response by its request key.
 
-        :param key: SHA-256 request key as produced by
-            :func:`astraea.providers.base.request_key`.
+        :param key: SHA-256 request hash as produced by
+            :func:`astraea.providers.base.hash_request`.
         :type key: str
         :returns: The cached :class:`Response`, or ``None`` on a cache miss.
         :rtype: Response | None

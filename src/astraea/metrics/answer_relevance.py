@@ -59,7 +59,7 @@ class AnswerRelevance(Metric):
             non-numeric.
         """
         prompt = _PROMPT_TEMPLATE.format(question=sample.input, answer=response.text)
-        payload = parse_json_object(self._judge.ask(prompt))
+        payload = parse_json_object(self._judge.ask(prompt).text)
 
         raw_score = payload.get("score")
         if not isinstance(raw_score, (int, float)) or isinstance(raw_score, bool):

@@ -39,20 +39,6 @@ def write_run(result: RunResult, output_dir: str | Path) -> Path:
     return run_dir
 
 
-def run_subdir_name(result: RunResult) -> str:
-    """Compute the per-run subdirectory name used by :func:`write_run`.
-
-    Exposed so callers (the CLI, downstream tooling) can predict where a
-    run will be written without re-implementing the same naming scheme.
-
-    :param result: Run result whose manifest carries the timestamp and ID.
-    :type result: RunResult
-    :returns: Filesystem-safe directory name component.
-    :rtype: str
-    """
-    return _run_subdir_name(result)
-
-
 def write_manifest(result: RunResult, path: Path) -> None:
     """Write the :class:`RunManifest` as a single JSON document.
 

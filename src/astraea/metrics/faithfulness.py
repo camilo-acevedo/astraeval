@@ -72,7 +72,7 @@ class Faithfulness(Metric):
             question=sample.input,
             answer=response.text,
         )
-        payload = parse_json_object(self._judge.ask(prompt))
+        payload = parse_json_object(self._judge.ask(prompt).text)
         claims = payload.get("claims")
         if not isinstance(claims, list):
             raise MetricError("Judge response is missing a 'claims' list.")

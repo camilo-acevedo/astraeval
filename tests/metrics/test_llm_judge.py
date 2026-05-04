@@ -23,9 +23,10 @@ def test_ask_forwards_prompt_and_default_temperature() -> None:
     provider = FakeProvider(handler=handler)
     judge = LLMJudge(provider, model="judge-m")
 
-    text = judge.ask("hello")
+    response = judge.ask("hello")
 
-    assert text == "echo:hello|judge-m"
+    assert response.text == "echo:hello|judge-m"
+    assert response.model == "judge-m"
     assert seen_params == [{"temperature": 0.0}]
 
 

@@ -6,6 +6,7 @@ import json
 from collections.abc import Mapping
 from typing import Any
 
+from astraea.core.types import Response
 from astraea.exceptions import MetricError
 from astraea.providers.base import Provider
 
@@ -58,16 +59,20 @@ class LLMJudge:
         """
         return self._model
 
-    def ask(self, prompt: str) -> str:
-        """Submit ``prompt`` to the configured provider and return raw text.
+    def ask(self, prompt: str) -> Response:
+        """Submit ``prompt`` to the configured provider and return the full response.
+
+        Returning the full :class:`~astraea.core.types.Response` (rather than
+        just the text) lets callers and downstream tooling capture token
+        counts, latency, and finish reason for the judge call as part of
+        the run audit trail.
 
         :param prompt: Fully rendered prompt for the judge.
         :type prompt: str
-        :returns: Generated text returned by the provider.
-        :rtype: str
+        :returns: Structured response produced by the provider.
+        :rtype: Response
         """
-        response = self._provider.complete(prompt, model=self._model, **self._params)
-        return response.text
+        return self._provider.complete(prompt, model=self._model, **self._params)
 
 
 def parse_json_object(text: str) -> dict[str, Any]:

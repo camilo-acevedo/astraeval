@@ -1,6 +1,6 @@
 [project]
 name = "astraea"
-version = "0.5.0"
+version = "0.6.0"
 description = "Astraea: reproducible LLM evaluation harness with run manifests, prompt hashing, and SQLite caching."
 readme = "README.md"
 license = { file = "LICENSE" }

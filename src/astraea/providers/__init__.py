@@ -1,7 +1,7 @@
 """LLM provider adapters for Anthropic, OpenAI, and Ollama."""
 
 from astraea.providers.anthropic_provider import AnthropicProvider
-from astraea.providers.base import Provider, request_key
+from astraea.providers.base import Provider, hash_request
 from astraea.providers.cached import CachedProvider
 from astraea.providers.fake import FakeProvider
 from astraea.providers.ollama_provider import OllamaProvider
@@ -14,5 +14,5 @@ __all__ = [
     "OllamaProvider",
     "OpenAIProvider",
     "Provider",
-    "request_key",
+    "hash_request",
 ]

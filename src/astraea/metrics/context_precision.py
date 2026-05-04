@@ -79,7 +79,7 @@ class ContextPrecision(Metric):
             answer=response.text,
             chunks=chunks_block,
         )
-        payload = parse_json_object(self._judge.ask(prompt))
+        payload = parse_json_object(self._judge.ask(prompt).text)
         chunks = payload.get("chunks")
         if not isinstance(chunks, list) or not chunks:
             raise MetricError("Judge response is missing a non-empty 'chunks' list.")
