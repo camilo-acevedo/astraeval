@@ -102,3 +102,80 @@ def test_html_report_handles_sample_without_expected(tmp_path: Path) -> None:
 
     body = out.read_text(encoding="utf-8")
     assert "no reference answer" in body
+
+
+def test_html_report_includes_inline_script(tmp_path: Path) -> None:
+    """The report embeds a vanilla JS block for search and expand controls."""
+    out = tmp_path / "report.html"
+    result = _execute_run()
+
+    write_html(result, out)
+
+    body = out.read_text(encoding="utf-8")
+    assert "<script>" in body
+    assert 'data-action="expand-all"' in body
+    assert 'id="sample-search"' in body
+
+
+def test_html_report_renders_threshold_badges(tmp_path: Path) -> None:
+    """When thresholds are passed, the summary table shows pass/fail badges."""
+    out = tmp_path / "report.html"
+    provider = FakeProvider(["yes", "yes"])
+    samples = [Sample(input="Q1", expected="yes"), Sample(input="Q2", expected="yes")]
+    result = EvalRun(provider, samples, [ExactMatch()], model="m").execute()
+
+    write_html(result, out, thresholds={"exact_match": 0.5})
+
+    body = out.read_text(encoding="utf-8")
+    assert "PASS" in body
+    assert "&gt;= 0.500" in body
+
+
+def test_html_report_renders_failed_threshold(tmp_path: Path) -> None:
+    """Scores below the configured threshold render with a FAIL badge."""
+    out = tmp_path / "report.html"
+    provider = FakeProvider(["wrong", "wrong"])
+    samples = [Sample(input="Q1", expected="right"), Sample(input="Q2", expected="right")]
+    result = EvalRun(provider, samples, [ExactMatch()], model="m").execute()
+
+    write_html(result, out, thresholds={"exact_match": 0.9})
+
+    body = out.read_text(encoding="utf-8")
+    assert "FAIL" in body
+
+
+def test_html_report_renders_run_id_copy_button(tmp_path: Path) -> None:
+    """The header carries a copy button bound to the run id."""
+    out = tmp_path / "report.html"
+    result = _execute_run()
+
+    write_html(result, out)
+
+    body = out.read_text(encoding="utf-8")
+    assert f'data-copy="{result.manifest.run_id}"' in body
+
+
+def test_html_report_includes_aggregate_stats(tmp_path: Path) -> None:
+    """The stats section reports sample count, tokens, and latency cards."""
+    out = tmp_path / "report.html"
+    result = _execute_run()
+
+    write_html(result, out)
+
+    body = out.read_text(encoding="utf-8")
+    assert 'class="stats"' in body
+    assert ">Samples<" in body
+    assert ">Total tokens<" in body
+    assert "Latency" in body
+
+
+def test_html_report_includes_sample_meta_badges(tmp_path: Path) -> None:
+    """Each sample card shows latency in its summary row when reported."""
+    out = tmp_path / "report.html"
+    result = _execute_run()
+
+    write_html(result, out)
+
+    body = out.read_text(encoding="utf-8")
+    assert "ms" in body
+    assert 'class="meta-badges"' in body

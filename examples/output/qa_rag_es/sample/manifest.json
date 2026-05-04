@@ -1,6 +1,6 @@
 {
   "dataset_hash": "a78edf3b8bc3dbf7a97ee5e1faa80b76b0a38e89e13e0b7a487be81d681013a6",
-  "finished_at": "2026-05-04T21:45:36+00:00",
+  "finished_at": "2026-05-04T22:22:50+00:00",
   "metric_names": [
     "exact_match",
     "hallucination_flag"
@@ -8,9 +8,9 @@
   "model": "demo-model",
   "params_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
   "provider": "fake",
-  "run_id": "14bde8cfdbc6df10",
+  "run_id": "6d7b29d031952720",
   "sample_count": 5,
-  "started_at": "2026-05-04T21:45:36+00:00",
+  "started_at": "2026-05-04T22:22:50+00:00",
   "summary": {
     "exact_match": 0.8,
     "hallucination_flag": 0.8

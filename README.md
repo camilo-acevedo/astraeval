@@ -34,7 +34,6 @@ Preview a real run report without cloning anything:
 - [Bundled examples](#bundled-examples)
 - [CI integration](#ci-integration)
 - [Development](#development)
-- [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -182,7 +181,7 @@ demos) is usable.
 
 ### From PyPI
 
-Coming in Phase 5. Until then, install from a Git tag:
+Not yet published. Until then, install from a Git tag:
 
 ```bash
 pip install git+https://github.com/camilo-acevedo/llm-evals.git@v0.4.0
@@ -645,21 +644,6 @@ src/llm_evals/
 tests/            # mirror of src/llm_evals/
 examples/         # datasets, configs, committed sample outputs
 ```
-
----
-
-## Roadmap
-
-- [x] **Phase 0** — Repo skeleton, tooling, CI matrix
-- [x] **Phase 1** — Provider/Dataset/Metric abstractions, SQLite cache
-- [x] **Phase 2** — MVP metrics: faithfulness, answer relevance, context precision, hallucination flag
-- [x] **Phase 3** — CLI (`run`, `diff`) + JSON/HTML reports
-- [x] **Phase 4** — Example datasets (EN/ES) and full documentation
-- [ ] **Phase 5** — Publish to PyPI with trusted publishing
-- [ ] **Post-1.0** — Embedding-based metrics, async provider variants, HuggingFace dataset loader, Markdown report writer
-
-The next breaking-change window will be tagged `v1.0.0`. Until then, treat
-the public API as alpha.
 
 ---
 

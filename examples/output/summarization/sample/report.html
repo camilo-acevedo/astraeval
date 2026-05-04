@@ -1,59 +1,222 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>llm-evals run ce5b6501db674864</title><style>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>llm-evals run 99cf3eb853447bea</title><style>
 :root {
   color-scheme: light dark;
-  --bg: #0f1115;
-  --panel: #161922;
-  --panel-2: #1d2230;
-  --border: #2a3040;
+  --bg: #0d1017;
+  --panel: #161b25;
+  --panel-2: #1d2330;
+  --panel-3: #252b3a;
+  --border: #2a3142;
+  --border-soft: rgba(255, 255, 255, 0.06);
   --text: #e8ebf1;
+  --text-soft: #c4cad6;
   --muted: #97a2b8;
+  --muted-2: #5b6478;
+  --accent: #60a5fa;
+  --accent-soft: rgba(96, 165, 250, 0.12);
   --good: #22c55e;
+  --good-soft: rgba(34, 197, 94, 0.14);
   --ok: #eab308;
+  --ok-soft: rgba(234, 179, 8, 0.14);
   --bad: #ef4444;
-  --link: #60a5fa;
+  --bad-soft: rgba(239, 68, 68, 0.14);
+  --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 6px 16px rgba(0,0,0,0.18);
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  font: 14px/1.55 var(--sans);
+  -webkit-font-smoothing: antialiased;
 }
-header {
+header.app-header {
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
   border-bottom: 1px solid var(--border);
-  padding: 18px 24px;
-  background: var(--panel);
+  padding: 24px 32px 22px;
 }
-header h1 { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
-header .meta { color: var(--muted); font-size: 13px; font-family: var(--mono); }
-main { max-width: 1100px; margin: 0 auto; padding: 24px; }
-section { margin-bottom: 32px; }
-section > h2 {
+.app-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.brand {
   font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  text-transform: lowercase;
+}
+.brand::after {
+  content: "/";
+  color: var(--muted-2);
+  margin: 0 8px;
+  font-weight: 400;
+}
+.app-title h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.run-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--panel-3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 4px 3px 10px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-soft);
+}
+.copy-btn {
+  background: transparent;
+  border: 0;
+  color: var(--muted);
+  cursor: pointer;
+  font: 11px var(--mono);
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+.copy-btn:hover { color: var(--text); background: var(--border); }
+.copy-btn.copied { color: var(--good); }
+.app-meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+.app-meta .sep {
+  color: var(--muted-2);
+  margin: 0 8px;
+}
+.hashes {
+  margin-top: 12px;
+  display: flex;
+  gap: 18px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+.hashes .hash-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.hashes code {
+  color: var(--text-soft);
+  background: var(--panel-3);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 32px 60px;
+}
+section {
+  margin-bottom: 28px;
+}
+section > h2 {
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: var(--muted);
   margin: 0 0 12px;
 }
-table {
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.stat-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.stat-card .label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.stat-card .value {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.stat-card .sub {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+.summary-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.summary-card table {
   width: 100%;
   border-collapse: collapse;
-  background: var(--panel);
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid var(--border);
 }
-th, td {
+.summary-card th, .summary-card td {
+  padding: 12px 16px;
   text-align: left;
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
-  font-family: var(--mono);
+  border-bottom: 1px solid var(--border-soft);
   font-size: 13px;
+  vertical-align: middle;
 }
-tr:last-child td { border-bottom: none; }
-th { color: var(--muted); font-weight: 500; background: var(--panel-2); }
+.summary-card tr:last-child td {
+  border-bottom: none;
+}
+.summary-card th {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  background: var(--panel-2);
+}
+.summary-card td.metric-name {
+  font-family: var(--mono);
+  font-weight: 500;
+  color: var(--text);
+}
+.bar {
+  width: 220px;
+  height: 6px;
+  background: var(--panel-3);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+.bar .fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+.bar .fill.score-good { background: var(--good); }
+.bar .fill.score-ok { background: var(--ok); }
+.bar .fill.score-bad { background: var(--bad); }
 .score {
   display: inline-block;
   padding: 2px 8px;
@@ -61,31 +224,102 @@ th { color: var(--muted); font-weight: 500; background: var(--panel-2); }
   font-family: var(--mono);
   font-size: 12px;
   font-weight: 600;
+  min-width: 56px;
+  text-align: center;
 }
-.score-good { background: rgba(34,197,94,0.15); color: var(--good); }
-.score-ok   { background: rgba(234,179,8,0.15);  color: var(--ok); }
-.score-bad  { background: rgba(239,68,68,0.15);  color: var(--bad); }
+.score-good { background: var(--good-soft); color: var(--good); }
+.score-ok { background: var(--ok-soft); color: var(--ok); }
+.score-bad { background: var(--bad-soft); color: var(--bad); }
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.badge-pass { background: var(--good-soft); color: var(--good); }
+.badge-fail { background: var(--bad-soft); color: var(--bad); }
+.badge-soft { background: var(--panel-3); color: var(--muted); }
+.muted { color: var(--muted-2); font-family: var(--mono); font-size: 12px; }
+.samples-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.samples-header h2 {
+  margin: 0;
+}
+.controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.controls input[type="search"] {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font: 13px var(--sans);
+  color: var(--text);
+  width: 220px;
+  transition: border-color 0.15s;
+}
+.controls input[type="search"]:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.controls input[type="search"]::placeholder { color: var(--muted-2); }
+.controls button {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font: 12px var(--sans);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.controls button:hover {
+  background: var(--panel-2);
+  color: var(--text);
+}
 details.sample {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 8px;
   overflow: hidden;
+  transition: border-color 0.15s;
 }
-details.sample[open] { background: var(--panel-2); }
+details.sample[open] {
+  background: var(--panel-2);
+  border-color: var(--border);
+}
 details.sample > summary {
   cursor: pointer;
-  padding: 12px 16px;
+  padding: 14px 18px;
   display: flex;
   align-items: center;
   gap: 12px;
   list-style: none;
+  user-select: none;
 }
 details.sample > summary::-webkit-details-marker { display: none; }
 details.sample > summary::before {
   content: "\203A";
   color: var(--muted);
-  transition: transform 0.15s;
+  font-size: 18px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+  font-family: var(--mono);
+  width: 12px;
+  display: inline-block;
 }
 details.sample[open] > summary::before { transform: rotate(90deg); }
 .idx {
@@ -93,26 +327,44 @@ details.sample[open] > summary::before { transform: rotate(90deg); }
   font-family: var(--mono);
   font-size: 12px;
   flex-shrink: 0;
+  min-width: 28px;
 }
 .input-preview {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 13px;
+  color: var(--text-soft);
 }
-.scores { display: flex; gap: 6px; flex-shrink: 0; }
-.body { padding: 0 16px 16px 30px; }
-.field { margin-top: 14px; }
+.meta-badges {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.scores {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.body {
+  padding: 4px 18px 18px 42px;
+  border-top: 1px solid var(--border-soft);
+}
+.field {
+  margin-top: 16px;
+}
 .field > h3 {
   font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--muted);
-  margin: 0 0 6px;
+  margin: 0 0 8px;
 }
 .field pre {
   font-family: var(--mono);
-  font-size: 13px;
+  font-size: 12.5px;
   white-space: pre-wrap;
   word-break: break-word;
   background: var(--bg);
@@ -120,6 +372,7 @@ details.sample[open] > summary::before { transform: rotate(90deg); }
   border-radius: 6px;
   padding: 10px 12px;
   margin: 0;
+  line-height: 1.55;
 }
 .context-block {
   font-family: var(--mono);
@@ -130,19 +383,118 @@ details.sample[open] > summary::before { transform: rotate(90deg); }
   padding: 8px 12px;
   margin-bottom: 6px;
   white-space: pre-wrap;
+  line-height: 1.55;
 }
 .context-index { color: var(--muted); margin-right: 8px; }
-.empty { color: var(--muted); font-style: italic; }
+.empty {
+  color: var(--muted-2);
+  font-style: italic;
+  font-size: 12.5px;
+}
+.response-meta {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.metrics-mini {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.metrics-mini table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.metrics-mini th, .metrics-mini td {
+  padding: 8px 12px;
+  font-size: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+  vertical-align: middle;
+}
+.metrics-mini tr:last-child td { border-bottom: none; }
+.metrics-mini th {
+  background: var(--panel-3);
+  font-weight: 500;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.metrics-mini td.metric-reason {
+  color: var(--text-soft);
+  font-family: var(--sans);
+}
+#no-results {
+  display: none;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  background: var(--panel);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+}
+@media (max-width: 720px) {
+  header.app-header { padding: 18px 16px; }
+  main { padding: 18px 16px 40px; }
+  .controls input[type="search"] { width: 160px; }
+  .bar { width: 120px; }
+  details.sample > summary { padding: 12px 14px; gap: 8px; }
+  .body { padding: 4px 14px 14px 28px; }
+}
 @media (prefers-color-scheme: light) {
   :root {
     --bg: #f7f8fa;
     --panel: #ffffff;
-    --panel-2: #f0f2f6;
+    --panel-2: #f3f5f9;
+    --panel-3: #e8ecf1;
     --border: #d8dde6;
+    --border-soft: rgba(0, 0, 0, 0.05);
     --text: #1a1c23;
+    --text-soft: #2c3038;
     --muted: #5b6478;
+    --muted-2: #8a92a4;
+    --accent: #2563eb;
+    --accent-soft: rgba(37, 99, 235, 0.1);
+    --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.06);
   }
 }
-</style></head><body><header><h1>Run ce5b6501db674864</h1><div class="meta">fake / demo-model &middot; 3 samples &middot; 2026-05-04T21:45:36+00:00</div></header><main><section id="summary"><h2>Summary</h2><table><thead><tr><th>Metric</th><th>Score</th></tr></thead><tbody><tr><td>hallucination_flag</td><td><span class="score score-good">0.889</span></td></tr></tbody></table></section><section id="samples"><h2>Samples</h2><details class="sample"><summary><span class="idx">#0</span><span class="input-preview">Summarize the following article in one sentence.</span><span class="scores"><span class="score score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>Summarize the following article in one sentence.</pre></div><div class="field"><h3>Expected</h3><div class="empty">no reference answer</div></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>Anthropic released Claude 4.7 in May 2026, a new generation of large language models with improved reasoning and longer effective context windows. The model family includes Opus, Sonnet, and Haiku tiers, each tuned for different cost and latency profiles.</div></div><div class="field"><h3>Response</h3><pre>Anthropic released Claude 4.7 in May 2026 with three tiers (Opus, Sonnet, Haiku) tuned for cost and latency.</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>hallucination_flag</td><td><span class="score score-good">1.000</span></td><td>All extracted tokens found in context.</td></tr></tbody></table></div></div></details>
-<details class="sample"><summary><span class="idx">#1</span><span class="input-preview">Write a brief summary of the news item below.</span><span class="scores"><span class="score score score-ok" title="hallucination_flag">0.67</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>Write a brief summary of the news item below.</pre></div><div class="field"><h3>Expected</h3><div class="empty">no reference answer</div></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>The European Union&#x27;s AI Act entered into force in 2024 with phased compliance deadlines. High-risk AI systems must demonstrate transparency, human oversight, and rigorous testing. Penalties for non-compliance can reach 7% of global annual turnover.</div></div><div class="field"><h3>Response</h3><pre>The EU AI Act took effect in 2024 with phased deadlines and fines up to 7% of global turnover for high-risk systems.</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>hallucination_flag</td><td><span class="score score-ok">0.667</span></td><td>1/3 tokens not found in context.</td></tr></tbody></table></div></div></details>
-<details class="sample"><summary><span class="idx">#2</span><span class="input-preview">Provide a one-sentence summary of this paragraph.</span><span class="scores"><span class="score score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>Provide a one-sentence summary of this paragraph.</pre></div><div class="field"><h3>Expected</h3><div class="empty">no reference answer</div></div><div class="field"><h3>Context</h3><div class="context-block"><span class="context-index">[0]</span>Retrieval-Augmented Generation (RAG) reduces hallucinations by injecting retrieved evidence into the prompt at inference time. RAG pipelines depend on three components: a chunker, an embedder, and a vector store. Their combined quality determines the upper bound of any downstream evaluation metric.</div></div><div class="field"><h3>Response</h3><pre>RAG injects retrieved evidence into prompts and depends on chunker, embedder, and vector store quality.</pre></div><div class="field"><h3>Metrics</h3><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td>hallucination_flag</td><td><span class="score score-good">1.000</span></td><td>All extracted tokens found in context.</td></tr></tbody></table></div></div></details></section></main></body></html>
+</style></head><body><header class="app-header"><div class="app-title"><span class="brand">llm-evals</span><h1>Run 99cf3eb853447bea</h1><span class="run-pill"><span>99cf3eb853447bea</span><button class="copy-btn" data-copy="99cf3eb853447bea" title="Copy run id">copy</button></span></div><div class="app-meta">fake/demo-model<span class="sep">|</span>3 samples<span class="sep">|</span>2026-05-04T22:22:50+00:00<span class="sep">|</span>0.0s</div><div class="hashes"><span class="hash-item">dataset: <code>021dc2952aa2...</code><button class="copy-btn" data-copy="021dc2952aa285b7529cf3e4a538fbe51d32f57b59b4b472226da8de51ca7c09" title="Copy dataset hash">copy</button></span><span class="hash-item">params: <code>44136fa355b3...</code><button class="copy-btn" data-copy="44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a" title="Copy params hash">copy</button></span></div></header><main><section class="stats"><div class="stat-card"><div class="label">Samples</div><div class="value">3</div></div><div class="stat-card"><div class="label">Total tokens</div><div class="value">-</div><div class="sub">not reported by provider</div></div><div class="stat-card"><div class="label">Latency (avg)</div><div class="value">0.00 ms</div><div class="sub">median 0.00 ms  max 0.00 ms</div></div></section><section id="summary"><h2>Summary</h2><div class="summary-card"><table><thead><tr><th>Metric</th><th>Score</th><th>Distribution</th><th>Threshold</th><th>Status</th></tr></thead><tbody><tr><td class="metric-name">hallucination_flag</td><td><span class="score score-good">0.889</span></td><td><div class="bar"><div class="fill score-good" style="width: 88.9%"></div></div></td><td><span class="muted">&gt;= 0.900</span></td><td><span class="badge badge-fail">FAIL</span></td></tr></tbody></table></div></section><section id="samples"><div class="samples-header"><h2>Samples (3)</h2><div class="controls"><input type="search" id="sample-search" placeholder="Filter by text..."><button data-action="expand-all">Expand all</button><button data-action="collapse-all">Collapse all</button></div></div><details class="sample" data-search-text="Summarize the following article in one sentence. Anthropic released Claude 4.7 in May 2026 with three tiers (Opus, Sonnet, Haiku) tuned for cost and latency.  Anthropic released Claude 4.7 in May 2026, a new generation of large language models with improved reasoning and longer effective context windows. The model family includes Opus, Sonnet, and Haiku tiers, each tuned for different cost and latency profiles. hallucination_flag All extracted tokens found in context."><summary><span class="idx">#0</span><span class="input-preview">Summarize the following article in one sentence.</span><span class="meta-badges"><span class="badge badge-soft">0.00 ms</span></span><span class="scores"><span class="score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>Summarize the following article in one sentence.</pre></div><div class="field"><h3>Expected</h3><div class="empty">no reference answer</div></div><div class="field"><h3>Context (1)</h3><div class="context-block"><span class="context-index">[0]</span>Anthropic released Claude 4.7 in May 2026, a new generation of large language models with improved reasoning and longer effective context windows. The model family includes Opus, Sonnet, and Haiku tiers, each tuned for different cost and latency profiles.</div></div><div class="field"><h3>Response</h3><pre>Anthropic released Claude 4.7 in May 2026 with three tiers (Opus, Sonnet, Haiku) tuned for cost and latency.</pre><div class="response-meta"><span class="badge badge-soft">0.00 ms</span></div></div><div class="field"><h3>Metrics</h3><div class="metrics-mini"><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td class="metric-name">hallucination_flag</td><td><span class="score score-good">1.000</span></td><td class="metric-reason">All extracted tokens found in context.</td></tr></tbody></table></div></div></div></details><details class="sample" data-search-text="Write a brief summary of the news item below. The EU AI Act took effect in 2024 with phased deadlines and fines up to 7% of global turnover for high-risk systems.  The European Union&#x27;s AI Act entered into force in 2024 with phased compliance deadlines. High-risk AI systems must demonstrate transparency, human oversight, and rigorous testing. Penalties for non-compliance can reach 7% of global annual turnover. hallucination_flag 1/3 tokens not found in context."><summary><span class="idx">#1</span><span class="input-preview">Write a brief summary of the news item below.</span><span class="meta-badges"><span class="badge badge-soft">0.00 ms</span></span><span class="scores"><span class="score score-ok" title="hallucination_flag">0.67</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>Write a brief summary of the news item below.</pre></div><div class="field"><h3>Expected</h3><div class="empty">no reference answer</div></div><div class="field"><h3>Context (1)</h3><div class="context-block"><span class="context-index">[0]</span>The European Union&#x27;s AI Act entered into force in 2024 with phased compliance deadlines. High-risk AI systems must demonstrate transparency, human oversight, and rigorous testing. Penalties for non-compliance can reach 7% of global annual turnover.</div></div><div class="field"><h3>Response</h3><pre>The EU AI Act took effect in 2024 with phased deadlines and fines up to 7% of global turnover for high-risk systems.</pre><div class="response-meta"><span class="badge badge-soft">0.00 ms</span></div></div><div class="field"><h3>Metrics</h3><div class="metrics-mini"><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td class="metric-name">hallucination_flag</td><td><span class="score score-ok">0.667</span></td><td class="metric-reason">1/3 tokens not found in context.</td></tr></tbody></table></div></div></div></details><details class="sample" data-search-text="Provide a one-sentence summary of this paragraph. RAG injects retrieved evidence into prompts and depends on chunker, embedder, and vector store quality.  Retrieval-Augmented Generation (RAG) reduces hallucinations by injecting retrieved evidence into the prompt at inference time. RAG pipelines depend on three components: a chunker, an embedder, and a vector store. Their combined quality determines the upper bound of any downstream evaluation metric. hallucination_flag All extracted tokens found in context."><summary><span class="idx">#2</span><span class="input-preview">Provide a one-sentence summary of this paragraph.</span><span class="meta-badges"><span class="badge badge-soft">0.00 ms</span></span><span class="scores"><span class="score score-good" title="hallucination_flag">1.00</span></span></summary><div class="body"><div class="field"><h3>Input</h3><pre>Provide a one-sentence summary of this paragraph.</pre></div><div class="field"><h3>Expected</h3><div class="empty">no reference answer</div></div><div class="field"><h3>Context (1)</h3><div class="context-block"><span class="context-index">[0]</span>Retrieval-Augmented Generation (RAG) reduces hallucinations by injecting retrieved evidence into the prompt at inference time. RAG pipelines depend on three components: a chunker, an embedder, and a vector store. Their combined quality determines the upper bound of any downstream evaluation metric.</div></div><div class="field"><h3>Response</h3><pre>RAG injects retrieved evidence into prompts and depends on chunker, embedder, and vector store quality.</pre><div class="response-meta"><span class="badge badge-soft">0.00 ms</span></div></div><div class="field"><h3>Metrics</h3><div class="metrics-mini"><table><thead><tr><th>Metric</th><th>Score</th><th>Reason</th></tr></thead><tbody><tr><td class="metric-name">hallucination_flag</td><td><span class="score score-good">1.000</span></td><td class="metric-reason">All extracted tokens found in context.</td></tr></tbody></table></div></div></div></details><div id="no-results">No samples match the current filter.</div></section></main><script>
+(() => {
+  const search = document.getElementById('sample-search');
+  const samples = Array.from(document.querySelectorAll('details.sample'));
+  const noResults = document.getElementById('no-results');
+  const filter = (q) => {
+    const query = q.trim().toLowerCase();
+    let visible = 0;
+    samples.forEach((s) => {
+      const text = (s.dataset.searchText || '').toLowerCase();
+      const match = !query || text.includes(query);
+      s.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+  };
+  if (search) search.addEventListener('input', (e) => filter(e.target.value));
+  document.querySelectorAll('[data-action]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const action = btn.dataset.action;
+      if (action === 'expand-all') samples.forEach((s) => { s.open = true; });
+      else if (action === 'collapse-all') samples.forEach((s) => { s.open = false; });
+    });
+  });
+  document.querySelectorAll('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy);
+        btn.classList.add('copied');
+        setTimeout(() => btn.classList.remove('copied'), 1500);
+      } catch (err) { /* clipboard unavailable */ }
+    });
+  });
+})();
+</script></body></html>

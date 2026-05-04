@@ -45,7 +45,7 @@ def run_command(args: argparse.Namespace) -> int:
     output_dir = Path(config.output.dir)
     run_dir = write_run(result, output_dir)
     if "html" in config.output.formats:
-        write_html(result, run_dir / "report.html")
+        write_html(result, run_dir / "report.html", thresholds=config.thresholds)
 
     failures = check_thresholds(result.summary, config.thresholds)
     _print_summary(result, config, run_dir, failures)
