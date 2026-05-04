@@ -1,4 +1,4 @@
-"""Tests for :mod:`astraea.providers.ollama_provider`."""
+"""Tests for :mod:`astraeval.providers.ollama_provider`."""
 
 from __future__ import annotations
 
@@ -7,8 +7,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from astraea.exceptions import ProviderError
-from astraea.providers.ollama_provider import OllamaProvider
+from astraeval.exceptions import ProviderError
+from astraeval.providers.ollama_provider import OllamaProvider
 
 
 def _dict_response(

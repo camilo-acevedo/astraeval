@@ -1,8 +1,8 @@
-"""Tests for :mod:`astraea.metrics.base`."""
+"""Tests for :mod:`astraeval.metrics.base`."""
 
 from __future__ import annotations
 
-from astraea.metrics.base import Metric, MetricResult
+from astraeval.metrics.base import Metric, MetricResult
 
 
 def test_metric_declares_score_as_abstract() -> None:

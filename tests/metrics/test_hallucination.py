@@ -1,13 +1,13 @@
-"""Tests for :mod:`astraea.metrics.hallucination`."""
+"""Tests for :mod:`astraeval.metrics.hallucination`."""
 
 from __future__ import annotations
 
 import pytest
 
-from astraea.core.types import Response
-from astraea.datasets.sample import Sample
-from astraea.exceptions import MetricError
-from astraea.metrics.hallucination import HallucinationFlag
+from astraeval.core.types import Response
+from astraeval.datasets.sample import Sample
+from astraeval.exceptions import MetricError
+from astraeval.metrics.hallucination import HallucinationFlag
 
 
 def _response(text: str) -> Response:

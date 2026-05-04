@@ -1,4 +1,4 @@
-"""Tests for :mod:`astraea.metrics.context_precision`."""
+"""Tests for :mod:`astraeval.metrics.context_precision`."""
 
 from __future__ import annotations
 
@@ -8,12 +8,12 @@ from typing import Any
 
 import pytest
 
-from astraea.core.types import Response
-from astraea.datasets.sample import Sample
-from astraea.exceptions import MetricError
-from astraea.metrics.context_precision import ContextPrecision
-from astraea.metrics.llm_judge import LLMJudge
-from astraea.providers.fake import FakeProvider
+from astraeval.core.types import Response
+from astraeval.datasets.sample import Sample
+from astraeval.exceptions import MetricError
+from astraeval.metrics.context_precision import ContextPrecision
+from astraeval.metrics.llm_judge import LLMJudge
+from astraeval.providers.fake import FakeProvider
 
 
 def _build_metric(judge_text: str) -> ContextPrecision:

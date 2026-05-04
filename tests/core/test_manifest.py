@@ -1,10 +1,10 @@
-"""Tests for :mod:`astraea.core.manifest`."""
+"""Tests for :mod:`astraeval.core.manifest`."""
 
 from __future__ import annotations
 
 import json
 
-from astraea.core.manifest import (
+from astraeval.core.manifest import (
     RunManifest,
     hash_dataset,
     hash_params,

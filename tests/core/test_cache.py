@@ -1,4 +1,4 @@
-"""Tests for :mod:`astraea.core.cache`."""
+"""Tests for :mod:`astraeval.core.cache`."""
 
 from __future__ import annotations
 
@@ -6,9 +6,9 @@ from pathlib import Path
 
 import pytest
 
-from astraea.core.cache import Cache
-from astraea.core.types import Response
-from astraea.exceptions import CacheError
+from astraeval.core.cache import Cache
+from astraeval.core.types import Response
+from astraeval.exceptions import CacheError
 
 
 def _make_response(text: str = "hi") -> Response:

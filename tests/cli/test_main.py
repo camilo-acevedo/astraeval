@@ -1,4 +1,4 @@
-"""Tests for :mod:`astraea.cli`."""
+"""Tests for :mod:`astraeval.cli`."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from astraea.cli import EXIT_ERROR, EXIT_OK, EXIT_THRESHOLD, main
+from astraeval.cli import EXIT_ERROR, EXIT_OK, EXIT_THRESHOLD, main
 
 _CONFIG_TEMPLATE = """\
 provider:
@@ -69,12 +69,12 @@ def _write_config(
 
 
 def test_version_flag_prints_version(capsys: pytest.CaptureFixture[str]) -> None:
-    """``astraea --version`` prints the package version and exits 0."""
+    """``astraeval --version`` prints the package version and exits 0."""
     with pytest.raises(SystemExit) as info:
         main(["--version"])
     captured = capsys.readouterr()
     assert info.value.code == 0
-    assert "astraea" in captured.out
+    assert "astraeval" in captured.out
 
 
 def test_no_args_prints_help(capsys: pytest.CaptureFixture[str]) -> None:

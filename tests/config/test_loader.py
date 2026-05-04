@@ -1,4 +1,4 @@
-"""Tests for :mod:`astraea.config.loader`."""
+"""Tests for :mod:`astraeval.config.loader`."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from astraea.config.loader import load_yaml
-from astraea.exceptions import ConfigError
+from astraeval.config.loader import load_yaml
+from astraeval.exceptions import ConfigError
 
 
 def test_load_minimal_yaml(tmp_path: Path) -> None:

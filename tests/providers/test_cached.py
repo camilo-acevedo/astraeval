@@ -1,12 +1,12 @@
-"""Tests for :mod:`astraea.providers.cached`."""
+"""Tests for :mod:`astraeval.providers.cached`."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from astraea.core.cache import Cache
-from astraea.providers.cached import CachedProvider
-from astraea.providers.fake import FakeProvider
+from astraeval.core.cache import Cache
+from astraeval.providers.cached import CachedProvider
+from astraeval.providers.fake import FakeProvider
 
 
 def test_cache_miss_then_hit_calls_inner_only_once(tmp_path: Path) -> None:

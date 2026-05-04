@@ -78,7 +78,7 @@ dmypy.json
 .DS_Store
 
 # Project-specific
-# SQLite caches from astraea runs
+# SQLite caches from astraeval runs
 *.sqlite
 *.sqlite3
 *.db

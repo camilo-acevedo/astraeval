@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-import astraea
+import astraeval
 
 
 def test_version_is_string() -> None:
-    """Verify ``astraea.__version__`` resolves to a non-empty string."""
-    assert isinstance(astraea.__version__, str)
-    assert astraea.__version__ != ""
+    """Verify ``astraeval.__version__`` resolves to a non-empty string."""
+    assert isinstance(astraeval.__version__, str)
+    assert astraeval.__version__ != ""

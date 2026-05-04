@@ -1,8 +1,8 @@
-"""Tests for :mod:`astraea.providers.base`."""
+"""Tests for :mod:`astraeval.providers.base`."""
 
 from __future__ import annotations
 
-from astraea.providers.base import Provider, hash_request
+from astraeval.providers.base import Provider, hash_request
 
 
 def test_hash_request_is_deterministic() -> None:

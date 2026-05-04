@@ -1,11 +1,11 @@
 {
-  "finished_at": "2026-05-04T22:39:04+00:00",
+  "finished_at": "2026-05-04T23:43:54+00:00",
   "metrics": {
     "hallucination_flag": 0.888888888888889
   },
   "model": "demo-model",
   "provider": "fake",
-  "run_id": "6ed96e5a31dc727f",
+  "run_id": "8b2fa5378a1afe74",
   "sample_count": 3,
-  "started_at": "2026-05-04T22:39:04+00:00"
+  "started_at": "2026-05-04T23:43:54+00:00"
 }

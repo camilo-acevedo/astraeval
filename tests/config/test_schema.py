@@ -1,10 +1,10 @@
-"""Tests for :mod:`astraea.config.schema`."""
+"""Tests for :mod:`astraeval.config.schema`."""
 
 from __future__ import annotations
 
 import pytest
 
-from astraea.config.schema import (
+from astraeval.config.schema import (
     CacheConfig,
     DatasetConfig,
     JudgeConfig,
@@ -12,7 +12,7 @@ from astraea.config.schema import (
     ProviderConfig,
     RunConfig,
 )
-from astraea.exceptions import ConfigError
+from astraeval.exceptions import ConfigError
 
 _MIN_RUN: dict[str, object] = {
     "provider": {"type": "fake", "model": "m", "responses": ["x"]},
@@ -139,7 +139,7 @@ def test_cache_config_defaults() -> None:
     cfg = CacheConfig.from_dict({})
 
     assert cfg.enabled is True
-    assert cfg.path == ".astraea-cache.sqlite"
+    assert cfg.path == ".astraeval-cache.sqlite"
 
 
 def test_output_config_defaults() -> None:

@@ -1,4 +1,4 @@
-"""Tests for :mod:`astraea.config.builder`."""
+"""Tests for :mod:`astraeval.config.builder`."""
 
 from __future__ import annotations
 
@@ -7,14 +7,14 @@ from pathlib import Path
 
 import pytest
 
-from astraea.config.builder import (
+from astraeval.config.builder import (
     build_dataset,
     build_eval_run,
     build_judge,
     build_metric,
     build_provider,
 )
-from astraea.config.schema import (
+from astraeval.config.schema import (
     CacheConfig,
     DatasetConfig,
     JudgeConfig,
@@ -22,14 +22,14 @@ from astraea.config.schema import (
     ProviderConfig,
     RunConfig,
 )
-from astraea.exceptions import ConfigError
-from astraea.metrics.answer_relevance import AnswerRelevance
-from astraea.metrics.context_precision import ContextPrecision
-from astraea.metrics.exact_match import ExactMatch
-from astraea.metrics.faithfulness import Faithfulness
-from astraea.metrics.hallucination import HallucinationFlag
-from astraea.metrics.llm_judge import LLMJudge
-from astraea.providers.fake import FakeProvider
+from astraeval.exceptions import ConfigError
+from astraeval.metrics.answer_relevance import AnswerRelevance
+from astraeval.metrics.context_precision import ContextPrecision
+from astraeval.metrics.exact_match import ExactMatch
+from astraeval.metrics.faithfulness import Faithfulness
+from astraeval.metrics.hallucination import HallucinationFlag
+from astraeval.metrics.llm_judge import LLMJudge
+from astraeval.providers.fake import FakeProvider
 
 
 def test_build_provider_fake_requires_responses() -> None:

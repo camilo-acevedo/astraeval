@@ -1,4 +1,4 @@
-"""Tests for :mod:`astraea.metrics.answer_relevance`."""
+"""Tests for :mod:`astraeval.metrics.answer_relevance`."""
 
 from __future__ import annotations
 
@@ -6,12 +6,12 @@ import json
 
 import pytest
 
-from astraea.core.types import Response
-from astraea.datasets.sample import Sample
-from astraea.exceptions import MetricError
-from astraea.metrics.answer_relevance import AnswerRelevance
-from astraea.metrics.llm_judge import LLMJudge
-from astraea.providers.fake import FakeProvider
+from astraeval.core.types import Response
+from astraeval.datasets.sample import Sample
+from astraeval.exceptions import MetricError
+from astraeval.metrics.answer_relevance import AnswerRelevance
+from astraeval.metrics.llm_judge import LLMJudge
+from astraeval.providers.fake import FakeProvider
 
 
 def _build_metric(judge_text: str) -> AnswerRelevance:

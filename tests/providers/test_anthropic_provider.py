@@ -1,4 +1,4 @@
-"""Tests for :mod:`astraea.providers.anthropic_provider`."""
+"""Tests for :mod:`astraeval.providers.anthropic_provider`."""
 
 from __future__ import annotations
 
@@ -8,8 +8,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from astraea.exceptions import ProviderError
-from astraea.providers.anthropic_provider import AnthropicProvider
+from astraeval.exceptions import ProviderError
+from astraeval.providers.anthropic_provider import AnthropicProvider
 
 
 def _build_messages_response(

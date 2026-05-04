@@ -1,14 +1,14 @@
-"""Tests for :mod:`astraea.reports.html_report`."""
+"""Tests for :mod:`astraeval.reports.html_report`."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from astraea.core.eval_run import EvalRun, RunResult
-from astraea.datasets.sample import Sample
-from astraea.metrics.exact_match import ExactMatch
-from astraea.providers.fake import FakeProvider
-from astraea.reports.html_report import write_html
+from astraeval.core.eval_run import EvalRun, RunResult
+from astraeval.datasets.sample import Sample
+from astraeval.metrics.exact_match import ExactMatch
+from astraeval.providers.fake import FakeProvider
+from astraeval.reports.html_report import write_html
 
 
 def _execute_run() -> RunResult:

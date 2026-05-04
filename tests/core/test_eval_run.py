@@ -1,11 +1,11 @@
-"""Tests for :mod:`astraea.core.eval_run`."""
+"""Tests for :mod:`astraeval.core.eval_run`."""
 
 from __future__ import annotations
 
-from astraea.core.eval_run import EvalRun
-from astraea.datasets.sample import Sample
-from astraea.metrics.exact_match import ExactMatch
-from astraea.providers.fake import FakeProvider
+from astraeval.core.eval_run import EvalRun
+from astraeval.datasets.sample import Sample
+from astraeval.metrics.exact_match import ExactMatch
+from astraeval.providers.fake import FakeProvider
 
 
 def test_run_produces_sample_results_in_order() -> None:
