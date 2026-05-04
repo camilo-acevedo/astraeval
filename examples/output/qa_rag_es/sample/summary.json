@@ -1,12 +1,12 @@
 {
-  "finished_at": "2026-05-04T22:22:50+00:00",
+  "finished_at": "2026-05-04T22:39:04+00:00",
   "metrics": {
     "exact_match": 0.8,
     "hallucination_flag": 0.8
   },
   "model": "demo-model",
   "provider": "fake",
-  "run_id": "6d7b29d031952720",
+  "run_id": "c88b68056bc403c1",
   "sample_count": 5,
-  "started_at": "2026-05-04T22:22:50+00:00"
+  "started_at": "2026-05-04T22:39:04+00:00"
 }

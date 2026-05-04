@@ -1,4 +1,4 @@
-"""Tests for :mod:`llm_evals.metrics.llm_judge`."""
+"""Tests for :mod:`astraea.metrics.llm_judge`."""
 
 from __future__ import annotations
 
@@ -7,9 +7,9 @@ from typing import Any
 
 import pytest
 
-from llm_evals.exceptions import MetricError
-from llm_evals.metrics.llm_judge import LLMJudge, parse_json_object
-from llm_evals.providers.fake import FakeProvider
+from astraea.exceptions import MetricError
+from astraea.metrics.llm_judge import LLMJudge, parse_json_object
+from astraea.providers.fake import FakeProvider
 
 
 def test_ask_forwards_prompt_and_default_temperature() -> None:

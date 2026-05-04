@@ -1,8 +1,8 @@
-"""Tests for :mod:`llm_evals.providers.base`."""
+"""Tests for :mod:`astraea.providers.base`."""
 
 from __future__ import annotations
 
-from llm_evals.providers.base import Provider, request_key
+from astraea.providers.base import Provider, request_key
 
 
 def test_request_key_is_deterministic() -> None:

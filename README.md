@@ -1,15 +1,19 @@
-# llm-evals
+# astraea
 
 > **Audit-grade LLM evaluation for Python.** Reproducible runs, prompt hashing, SQLite caching, and a CI gate that fails PRs when metrics regress.
 
-[![CI](https://github.com/camilo-acevedo/llm-evals/actions/workflows/ci.yml/badge.svg)](https://github.com/camilo-acevedo/llm-evals/actions/workflows/ci.yml)
+[![CI](https://github.com/camilo-acevedo/astraea/actions/workflows/ci.yml/badge.svg)](https://github.com/camilo-acevedo/astraea/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Type-checked: mypy strict](https://img.shields.io/badge/type--checked-mypy_strict-2b6cb0.svg)](pyproject.toml)
 [![Code style: ruff](https://img.shields.io/badge/style-ruff-000000.svg)](https://docs.astral.sh/ruff/)
 [![Coverage: 94%](https://img.shields.io/badge/coverage-94%25-brightgreen.svg)](#development)
 
-**Status:** alpha (v0.4.0) — feature-complete through Phase 4. The public API may still change before 1.0.
+Astraea was the Greek goddess of justice, the last divine figure to leave the
+mortal world and return as the constellation Virgo. The library borrows the
+metaphor: an impartial scorer that records every verdict for later audit.
+
+**Status:** alpha (v0.5.0). The public API may still shift before 1.0.
 
 Preview a real run report without cloning anything:
 [`qa_rag_en/sample/report.html`](examples/output/qa_rag_en/sample/report.html) ·
@@ -20,7 +24,7 @@ Preview a real run report without cloning anything:
 
 ## Table of contents
 
-- [Why llm-evals?](#why-llm-evals)
+- [Why astraea?](#why-astraea)
 - [Architecture](#architecture)
 - [Quickstart](#quickstart-offline-no-api-key)
 - [Installation](#installation)
@@ -39,14 +43,14 @@ Preview a real run report without cloning anything:
 
 ---
 
-## Why llm-evals?
+## Why astraea?
 
 Most evaluation libraries are excellent at **scoring** models. They are less
 opinionated about what happens **after** the score: which prompt produced it,
 against which dataset, with which model version, on which day. When a metric
 moves three months later, the question "what changed?" is hard to answer.
 
-`llm-evals` is built around three opinions:
+Astraea is built around three opinions:
 
 1. **Every run is auditable.** A `manifest.json` records hashes of the prompt,
    dataset, and forwarded provider parameters, alongside ISO-8601 timestamps,
@@ -56,22 +60,22 @@ moves three months later, the question "what changed?" is hard to answer.
    `sha256(provider, model, prompt, params)` means a re-run after a config
    tweak only pays for the calls that changed.
 3. **Every regression is gateable.** Thresholds in YAML map cleanly to exit
-   codes. A `--max-regression` budget on `llm-evals diff` fails a PR when any
+   codes. A `--max-regression` budget on `astraea diff` fails a PR when any
    metric drops more than allowed against a stored baseline.
 
 ### Compared to alternatives
 
-|                              | llm-evals | DeepEval | Ragas | promptfoo |
-| ---------------------------- | :-------: | :------: | :---: | :-------: |
-| Run manifests (hashes, IDs)  |    yes    |    no    |  no   |   partial |
-| SQLite call cache by default |    yes    |    no    |  no   |    yes    |
-| Spanish-first sample data    |    yes    |    no    |  no   |    no     |
-| CLI exit-code thresholds     |    yes    |   yes    |  no   |    yes    |
-| LLM-as-judge metrics         |    yes    |   yes    |  yes  |    yes    |
-| Strict typing (mypy strict)  |    yes    |   no     |  no   |    n/a    |
-| Pure-Python, no Node runtime |    yes    |   yes    |  yes  |    no     |
+|                              | astraea  | DeepEval | Ragas | promptfoo |
+| ---------------------------- | :------: | :------: | :---: | :-------: |
+| Run manifests (hashes, IDs)  |   yes    |    no    |  no   |   partial |
+| SQLite call cache by default |   yes    |    no    |  no   |    yes    |
+| Spanish-first sample data    |   yes    |    no    |  no   |    no     |
+| CLI exit-code thresholds     |   yes    |   yes    |  no   |    yes    |
+| LLM-as-judge metrics         |   yes    |   yes    |  yes  |    yes    |
+| Strict typing (mypy strict)  |   yes    |   no     |  no   |    n/a    |
+| Pure-Python, no Node runtime |   yes    |   yes    |  yes  |    no     |
 
-`llm-evals` is intentionally smaller in scope: it ships the four metrics that
+Astraea is intentionally smaller in scope: it ships the four metrics that
 cover ~80% of RAG evaluations and skips the rest. If you need 30 metrics out
 of the box, DeepEval or Ragas are better choices.
 
@@ -80,30 +84,30 @@ of the box, DeepEval or Ragas are better choices.
 ## Architecture
 
 ```
-            ┌──────────────┐
-            │  config.yaml │
-            └──────┬───────┘
-                   │ load_yaml + RunConfig.from_dict
-                   ▼
-         ┌─────────────────────┐
-         │       EvalRun       │  orchestrator
-         └──┬──────┬───────┬───┘
-            │      │       │
-   ┌────────▼─┐  ┌─▼────┐ ┌▼────────┐
-   │ Provider │  │Dataset│ │ Metric  │  (× N)
-   │  (LLM)   │  │       │ │         │
-   └────┬─────┘  └───────┘ └────┬────┘
-        │                       │
-   ┌────▼─────┐            ┌────▼─────┐
-   │  Cache   │            │  Judge   │  (LLM, optional)
-   │ (SQLite) │            │          │
-   └──────────┘            └──────────┘
-                  │
-                  ▼
-        ┌────────────────────┐
-        │   RunManifest +    │  manifest.json + summary.json
-        │   per-sample log   │  + samples.jsonl + report.html
-        └────────────────────┘
+            +--------------+
+            |  config.yaml |
+            +------+-------+
+                   | load_yaml + RunConfig.from_dict
+                   v
+         +---------------------+
+         |       EvalRun       |  orchestrator
+         +-+----------+-------++
+           |          |       |
+   +-------v--+   +---v----+ +v--------+
+   | Provider |   |Dataset | | Metric  |  (x N)
+   |  (LLM)   |   |        | |         |
+   +----+-----+   +--------+ +----+----+
+        |                         |
+   +----v-----+              +----v-----+
+   |  Cache   |              |  Judge   |  (LLM, optional)
+   | (SQLite) |              |          |
+   +----------+              +----------+
+                  |
+                  v
+        +--------------------+
+        |   RunManifest +    |  manifest.json + summary.json
+        |   per-sample log   |  + samples.jsonl + report.html
+        +--------------------+
 ```
 
 ### Lifecycle of a single sample
@@ -128,11 +132,11 @@ of the box, DeepEval or Ragas are better choices.
 Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-git clone https://github.com/camilo-acevedo/llm-evals.git
-cd llm-evals
+git clone https://github.com/camilo-acevedo/astraea.git
+cd astraea
 uv sync --all-extras
 
-uv run llm-evals run examples/configs/qa_rag_en.yaml
+uv run astraea run examples/configs/qa_rag_en.yaml
 ```
 
 The bundled example uses a `FakeProvider` with canned answers, so no Anthropic
@@ -160,8 +164,8 @@ The committed reference run lives at
 ### From source (current)
 
 ```bash
-git clone https://github.com/camilo-acevedo/llm-evals.git
-cd llm-evals
+git clone https://github.com/camilo-acevedo/astraea.git
+cd astraea
 uv sync --all-extras   # or: pip install -e ".[all]"
 ```
 
@@ -170,10 +174,10 @@ uv sync --all-extras   # or: pip install -e ".[all]"
 Each provider is opt-in to keep the install footprint small:
 
 ```bash
-pip install 'llm-evals[anthropic]'        # Anthropic only
-pip install 'llm-evals[openai]'           # OpenAI / OpenAI-compatible only
-pip install 'llm-evals[ollama]'           # Ollama only
-pip install 'llm-evals[all]'              # all three SDKs
+pip install 'astraea[anthropic]'        # Anthropic only
+pip install 'astraea[openai]'           # OpenAI / OpenAI-compatible only
+pip install 'astraea[ollama]'           # Ollama only
+pip install 'astraea[all]'              # all three SDKs
 ```
 
 Without any extra installed, only the `FakeProvider` (for tests and offline
@@ -184,7 +188,7 @@ demos) is usable.
 Not yet published. Until then, install from a Git tag:
 
 ```bash
-pip install git+https://github.com/camilo-acevedo/llm-evals.git@v0.4.0
+pip install git+https://github.com/camilo-acevedo/astraea.git@v0.5.0
 ```
 
 ---
@@ -224,10 +228,10 @@ metrics:
   - type: hallucination_flag
     normalize_case: true
 
-# Optional: SQLite cache (enabled by default at .llm-evals-cache.sqlite)
+# Optional: SQLite cache (enabled by default at .astraea-cache.sqlite)
 cache:
   enabled: true
-  path: .llm-evals-cache.sqlite
+  path: .astraea-cache.sqlite
 
 # Required when any LLM-as-judge metric is used
 judge:
@@ -264,12 +268,12 @@ required by specific metrics (see [Metrics](#metrics)).
 ## CLI reference
 
 ```text
-llm-evals --version
-llm-evals run <config.yaml> [--output-dir DIR] [--no-cache]
-llm-evals diff <baseline-dir> <candidate-dir> [--max-regression FLOAT]
+astraea --version
+astraea run <config.yaml> [--output-dir DIR] [--no-cache]
+astraea diff <baseline-dir> <candidate-dir> [--max-regression FLOAT]
 ```
 
-### `llm-evals run`
+### `astraea run`
 
 Loads the YAML configuration, builds an `EvalRun`, executes it, persists
 configured reports, and gates on thresholds.
@@ -279,7 +283,7 @@ configured reports, and gates on thresholds.
 | `--output-dir`   | Override `output.dir` from the config (e.g. on a CI scratch directory)    |
 | `--no-cache`     | Disable the SQLite request cache regardless of `cache.enabled` in YAML    |
 
-### `llm-evals diff`
+### `astraea diff`
 
 Compares two run output directories. Prints a per-metric side-by-side table
 with deltas. With `--max-regression`, exits non-zero when any metric drops
@@ -305,19 +309,19 @@ When the CLI does not fit (custom dataset loaders, integration tests, embedded
 in a larger pipeline), use the library directly:
 
 ```python
-from llm_evals.core.cache import Cache
-from llm_evals.core.eval_run import EvalRun
-from llm_evals.datasets.jsonl import load_jsonl
-from llm_evals.metrics.exact_match import ExactMatch
-from llm_evals.metrics.faithfulness import Faithfulness
-from llm_evals.metrics.llm_judge import LLMJudge
-from llm_evals.providers.anthropic_provider import AnthropicProvider
-from llm_evals.providers.cached import CachedProvider
+from astraea.core.cache import Cache
+from astraea.core.eval_run import EvalRun
+from astraea.datasets.jsonl import load_jsonl
+from astraea.metrics.exact_match import ExactMatch
+from astraea.metrics.faithfulness import Faithfulness
+from astraea.metrics.llm_judge import LLMJudge
+from astraea.providers.anthropic_provider import AnthropicProvider
+from astraea.providers.cached import CachedProvider
 
 # Wrap your provider in a cache so re-runs do not re-pay tokens
 provider = CachedProvider(
     AnthropicProvider(api_key="..."),
-    Cache(".llm-evals-cache.sqlite"),
+    Cache(".astraea-cache.sqlite"),
 )
 
 # LLM-as-judge metrics receive a configured judge
@@ -478,7 +482,7 @@ in WAL mode for safe concurrent reads.
 
 ```python
 sha256(json.dumps({
-    "provider": provider_name,   # e.g. "anthropic"
+    "provider": provider_name,    # e.g. "anthropic"
     "model":    model_id,         # e.g. "claude-opus-4-7"
     "prompt":   prompt_text,
     "params":   forwarded_params, # temperature, max_tokens, system, ...
@@ -502,18 +506,18 @@ that is usually what you want.
 
 | Provider | Install                              | Constructor key       | Notes |
 | -------- | ------------------------------------ | --------------------- | ----- |
-| Anthropic| `pip install 'llm-evals[anthropic]'` | `provider.type: anthropic` | `default_max_tokens` settable; Messages API |
-| OpenAI   | `pip install 'llm-evals[openai]'`    | `provider.type: openai` | `base_url` lets you point at Azure / vLLM |
-| Ollama   | `pip install 'llm-evals[ollama]'`    | `provider.type: ollama` | Local-first; supports both legacy dict and modern object response shapes |
-| Fake     | (built-in)                           | `provider.type: fake`   | Deterministic; for tests and offline demos |
+| Anthropic| `pip install 'astraea[anthropic]'`   | `provider.type: anthropic` | `default_max_tokens` settable; Messages API |
+| OpenAI   | `pip install 'astraea[openai]'`      | `provider.type: openai`    | `base_url` lets you point at Azure / vLLM |
+| Ollama   | `pip install 'astraea[ollama]'`      | `provider.type: ollama`    | Local-first; supports both legacy dict and modern object response shapes |
+| Fake     | (built-in)                           | `provider.type: fake`      | Deterministic; for tests and offline demos |
 
 ### Adding a custom provider
 
-Extend `llm_evals.providers.base.Provider`:
+Extend `astraea.providers.base.Provider`:
 
 ```python
-from llm_evals.core.types import Response
-from llm_evals.providers.base import Provider
+from astraea.core.types import Response
+from astraea.providers.base import Provider
 
 class MyProvider(Provider):
     def __init__(self, ...):
@@ -582,7 +586,7 @@ jobs:
       - name: Run evaluation gate
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: uv run llm-evals run eval/config.yaml
+        run: uv run astraea run eval/config.yaml
 
       - name: Upload run artifacts
         if: always()
@@ -601,7 +605,7 @@ For comparing a PR against `main`:
 ```yaml
       - name: Compare against baseline
         run: |
-          uv run llm-evals diff baseline/sample candidate/sample --max-regression 0.05
+          uv run astraea diff baseline/sample candidate/sample --max-regression 0.05
 ```
 
 ---
@@ -609,8 +613,8 @@ For comparing a PR against `main`:
 ## Development
 
 ```bash
-git clone https://github.com/camilo-acevedo/llm-evals.git
-cd llm-evals
+git clone https://github.com/camilo-acevedo/astraea.git
+cd astraea
 uv sync --all-extras
 uv run pre-commit install
 ```
@@ -631,7 +635,7 @@ CI runs the full toolchain on Linux, macOS, and Windows across Python 3.11,
 ### Project layout
 
 ```
-src/llm_evals/
+src/astraea/
 ├── core/         # EvalRun, Cache, RunManifest, Response
 ├── providers/    # Provider ABC, FakeProvider, CachedProvider, real adapters
 ├── datasets/     # Sample, JSONL loader
@@ -639,9 +643,9 @@ src/llm_evals/
 ├── reports/      # JSON and HTML writers
 ├── config/       # YAML schema + loader + builder
 ├── cli/          # argparse subcommand dispatcher
-└── exceptions.py # LLMEvalsError hierarchy
+└── exceptions.py # AstraeaError hierarchy
 
-tests/            # mirror of src/llm_evals/
+tests/            # mirror of src/astraea/
 examples/         # datasets, configs, committed sample outputs
 ```
 

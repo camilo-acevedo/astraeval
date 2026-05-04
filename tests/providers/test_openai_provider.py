@@ -1,4 +1,4 @@
-"""Tests for :mod:`llm_evals.providers.openai_provider`."""
+"""Tests for :mod:`astraea.providers.openai_provider`."""
 
 from __future__ import annotations
 
@@ -8,8 +8,8 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from llm_evals.exceptions import ProviderError
-from llm_evals.providers.openai_provider import OpenAIProvider
+from astraea.exceptions import ProviderError
+from astraea.providers.openai_provider import OpenAIProvider
 
 
 def _build_chat_completion(

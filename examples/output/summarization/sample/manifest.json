@@ -1,15 +1,15 @@
 {
   "dataset_hash": "021dc2952aa285b7529cf3e4a538fbe51d32f57b59b4b472226da8de51ca7c09",
-  "finished_at": "2026-05-04T22:22:50+00:00",
+  "finished_at": "2026-05-04T22:39:04+00:00",
   "metric_names": [
     "hallucination_flag"
   ],
   "model": "demo-model",
   "params_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
   "provider": "fake",
-  "run_id": "99cf3eb853447bea",
+  "run_id": "6ed96e5a31dc727f",
   "sample_count": 3,
-  "started_at": "2026-05-04T22:22:50+00:00",
+  "started_at": "2026-05-04T22:39:04+00:00",
   "summary": {
     "hallucination_flag": 0.888888888888889
   }

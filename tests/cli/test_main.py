@@ -1,4 +1,4 @@
-"""Tests for :mod:`llm_evals.cli`."""
+"""Tests for :mod:`astraea.cli`."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from llm_evals.cli import EXIT_ERROR, EXIT_OK, EXIT_THRESHOLD, main
+from astraea.cli import EXIT_ERROR, EXIT_OK, EXIT_THRESHOLD, main
 
 _CONFIG_TEMPLATE = """\
 provider:
@@ -69,12 +69,12 @@ def _write_config(
 
 
 def test_version_flag_prints_version(capsys: pytest.CaptureFixture[str]) -> None:
-    """``llm-evals --version`` prints the package version and exits 0."""
+    """``astraea --version`` prints the package version and exits 0."""
     with pytest.raises(SystemExit) as info:
         main(["--version"])
     captured = capsys.readouterr()
     assert info.value.code == 0
-    assert "llm-evals" in captured.out
+    assert "astraea" in captured.out
 
 
 def test_no_args_prints_help(capsys: pytest.CaptureFixture[str]) -> None:

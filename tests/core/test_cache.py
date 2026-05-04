@@ -1,4 +1,4 @@
-"""Tests for :mod:`llm_evals.core.cache`."""
+"""Tests for :mod:`astraea.core.cache`."""
 
 from __future__ import annotations
 
@@ -6,9 +6,9 @@ from pathlib import Path
 
 import pytest
 
-from llm_evals.core.cache import Cache
-from llm_evals.core.types import Response
-from llm_evals.exceptions import CacheError
+from astraea.core.cache import Cache
+from astraea.core.types import Response
+from astraea.exceptions import CacheError
 
 
 def _make_response(text: str = "hi") -> Response:

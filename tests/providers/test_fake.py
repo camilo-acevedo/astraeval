@@ -1,4 +1,4 @@
-"""Tests for :mod:`llm_evals.providers.fake`."""
+"""Tests for :mod:`astraea.providers.fake`."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from typing import Any
 
 import pytest
 
-from llm_evals.providers.fake import FakeProvider
+from astraea.providers.fake import FakeProvider
 
 
 def test_static_responses_are_returned_in_order() -> None:

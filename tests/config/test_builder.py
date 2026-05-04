@@ -1,4 +1,4 @@
-"""Tests for :mod:`llm_evals.config.builder`."""
+"""Tests for :mod:`astraea.config.builder`."""
 
 from __future__ import annotations
 
@@ -7,14 +7,14 @@ from pathlib import Path
 
 import pytest
 
-from llm_evals.config.builder import (
+from astraea.config.builder import (
     build_dataset,
     build_eval_run,
     build_judge,
     build_metric,
     build_provider,
 )
-from llm_evals.config.schema import (
+from astraea.config.schema import (
     CacheConfig,
     DatasetConfig,
     JudgeConfig,
@@ -22,14 +22,14 @@ from llm_evals.config.schema import (
     ProviderConfig,
     RunConfig,
 )
-from llm_evals.exceptions import ConfigError
-from llm_evals.metrics.answer_relevance import AnswerRelevance
-from llm_evals.metrics.context_precision import ContextPrecision
-from llm_evals.metrics.exact_match import ExactMatch
-from llm_evals.metrics.faithfulness import Faithfulness
-from llm_evals.metrics.hallucination import HallucinationFlag
-from llm_evals.metrics.llm_judge import LLMJudge
-from llm_evals.providers.fake import FakeProvider
+from astraea.exceptions import ConfigError
+from astraea.metrics.answer_relevance import AnswerRelevance
+from astraea.metrics.context_precision import ContextPrecision
+from astraea.metrics.exact_match import ExactMatch
+from astraea.metrics.faithfulness import Faithfulness
+from astraea.metrics.hallucination import HallucinationFlag
+from astraea.metrics.llm_judge import LLMJudge
+from astraea.providers.fake import FakeProvider
 
 
 def test_build_provider_fake_requires_responses() -> None:

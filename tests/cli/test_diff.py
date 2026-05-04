@@ -1,4 +1,4 @@
-"""Tests for the ``llm-evals diff`` subcommand."""
+"""Tests for the ``astraea diff`` subcommand."""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from pathlib import Path
 
 import pytest
 
-from llm_evals.cli import EXIT_ERROR, EXIT_OK, EXIT_THRESHOLD, main
+from astraea.cli import EXIT_ERROR, EXIT_OK, EXIT_THRESHOLD, main
 
 
 def _write_run_dir(

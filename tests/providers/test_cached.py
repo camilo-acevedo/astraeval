@@ -1,12 +1,12 @@
-"""Tests for :mod:`llm_evals.providers.cached`."""
+"""Tests for :mod:`astraea.providers.cached`."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from llm_evals.core.cache import Cache
-from llm_evals.providers.cached import CachedProvider
-from llm_evals.providers.fake import FakeProvider
+from astraea.core.cache import Cache
+from astraea.providers.cached import CachedProvider
+from astraea.providers.fake import FakeProvider
 
 
 def test_cache_miss_then_hit_calls_inner_only_once(tmp_path: Path) -> None:

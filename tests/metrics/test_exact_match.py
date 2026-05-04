@@ -1,13 +1,13 @@
-"""Tests for :mod:`llm_evals.metrics.exact_match`."""
+"""Tests for :mod:`astraea.metrics.exact_match`."""
 
 from __future__ import annotations
 
 import pytest
 
-from llm_evals.core.types import Response
-from llm_evals.datasets.sample import Sample
-from llm_evals.exceptions import MetricError
-from llm_evals.metrics.exact_match import ExactMatch
+from astraea.core.types import Response
+from astraea.datasets.sample import Sample
+from astraea.exceptions import MetricError
+from astraea.metrics.exact_match import ExactMatch
 
 
 def _response(text: str) -> Response:

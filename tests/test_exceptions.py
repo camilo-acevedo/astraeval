@@ -1,17 +1,17 @@
-"""Tests for :mod:`llm_evals.exceptions`."""
+"""Tests for :mod:`astraea.exceptions`."""
 
 from __future__ import annotations
 
-from llm_evals.exceptions import (
+from astraea.exceptions import (
+    AstraeaError,
     CacheError,
     DatasetError,
-    LLMEvalsError,
     MetricError,
     ProviderError,
 )
 
 
 def test_all_subclasses_inherit_from_base() -> None:
-    """Every domain-specific error subclasses :class:`LLMEvalsError`."""
+    """Every domain-specific error subclasses :class:`AstraeaError`."""
     for cls in (ProviderError, CacheError, DatasetError, MetricError):
-        assert issubclass(cls, LLMEvalsError)
+        assert issubclass(cls, AstraeaError)

@@ -1,8 +1,8 @@
-"""Tests for :mod:`llm_evals.datasets.sample`."""
+"""Tests for :mod:`astraea.datasets.sample`."""
 
 from __future__ import annotations
 
-from llm_evals.datasets.sample import Sample
+from astraea.datasets.sample import Sample
 
 
 def test_default_fields() -> None:

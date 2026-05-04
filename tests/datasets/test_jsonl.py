@@ -1,4 +1,4 @@
-"""Tests for :mod:`llm_evals.datasets.jsonl`."""
+"""Tests for :mod:`astraea.datasets.jsonl`."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pytest
 
-from llm_evals.datasets.jsonl import load_jsonl
-from llm_evals.exceptions import DatasetError
+from astraea.datasets.jsonl import load_jsonl
+from astraea.exceptions import DatasetError
 
 
 def test_loads_minimal_records(tmp_path: Path) -> None:
