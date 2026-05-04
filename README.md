@@ -2,7 +2,7 @@
 
 > Reproducible LLM evaluation harness with run manifests, prompt hashing, and SQLite caching.
 
-[![CI](https://github.com/bryamacevedo/llm-evals/actions/workflows/ci.yml/badge.svg)](https://github.com/bryamacevedo/llm-evals/actions/workflows/ci.yml)
+[![CI](https://github.com/camilo-acevedo/llm-evals/actions/workflows/ci.yml/badge.svg)](https://github.com/camilo-acevedo/llm-evals/actions/workflows/ci.yml)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
@@ -57,7 +57,7 @@ that need to **audit and reproduce** scores months later:
 > Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-git clone https://github.com/bryamacevedo/llm-evals.git
+git clone https://github.com/camilo-acevedo/llm-evals.git
 cd llm-evals
 uv sync --all-extras
 uv run pytest

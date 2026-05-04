@@ -26,9 +26,9 @@ ollama = ["ollama>=0.4.0"]
 all = ["anthropic>=0.40.0", "openai>=1.50.0", "ollama>=0.4.0"]
 
 [project.urls]
-Homepage = "https://github.com/bryamacevedo/llm-evals"
-Repository = "https://github.com/bryamacevedo/llm-evals"
-Issues = "https://github.com/bryamacevedo/llm-evals/issues"
+Homepage = "https://github.com/camilo-acevedo/llm-evals"
+Repository = "https://github.com/camilo-acevedo/llm-evals"
+Issues = "https://github.com/camilo-acevedo/llm-evals/issues"
 
 [project.scripts]
 llm-evals = "llm_evals.cli:main"
