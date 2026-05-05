@@ -92,3 +92,6 @@ secrets.json
 
 # Claude Code local state
 .claude/
+
+# Local-only documentation drafts
+/assets/docs/
