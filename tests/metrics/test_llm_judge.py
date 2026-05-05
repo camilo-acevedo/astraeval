@@ -7,8 +7,9 @@ from typing import Any
 
 import pytest
 
+from astraeval.core.types import Response
 from astraeval.exceptions import MetricError
-from astraeval.metrics.llm_judge import LLMJudge, parse_json_object
+from astraeval.metrics.llm_judge import LLMJudge, parse_json_object, parse_judge_response
 from astraeval.providers.fake import FakeProvider
 
 
@@ -79,12 +80,74 @@ def test_parse_json_object_strips_fence_without_language_tag() -> None:
 
 
 def test_parse_json_object_rejects_invalid_json() -> None:
-    """Invalid JSON surfaces as :class:`MetricError`, not :class:`ValueError`."""
-    with pytest.raises(MetricError, match="valid JSON"):
+    """Garbage text surfaces as :class:`MetricError`, not :class:`ValueError`."""
+    with pytest.raises(MetricError, match="valid JSON object"):
         parse_json_object("not json at all")
 
 
 def test_parse_json_object_rejects_non_object() -> None:
-    """Top-level lists or scalars are rejected with a descriptive message."""
-    with pytest.raises(MetricError, match="non-object"):
+    """Top-level arrays are rejected because metrics expect a mapping."""
+    with pytest.raises(MetricError, match="valid JSON object"):
         parse_json_object("[1, 2, 3]")
+
+
+def test_parse_json_object_extracts_object_from_prose() -> None:
+    """A JSON object embedded in commentary is recovered."""
+    text = 'Sure, here is my analysis: {"score": 0.8, "reason": "looks good"} -- end.'
+
+    assert parse_json_object(text) == {"score": 0.8, "reason": "looks good"}
+
+
+def test_parse_json_object_handles_braces_inside_strings() -> None:
+    """Brace tracking does not get confused by braces inside string literals."""
+    text = '{"text": "this { is not } a brace boundary", "ok": true}'
+
+    assert parse_json_object(text) == {
+        "text": "this { is not } a brace boundary",
+        "ok": True,
+    }
+
+
+def test_parse_json_object_handles_nested_objects() -> None:
+    """Nested objects inside prose are extracted correctly."""
+    text = 'Result follows: {"outer": {"inner": [1, 2]}, "k": "v"} done.'
+
+    assert parse_json_object(text) == {"outer": {"inner": [1, 2]}, "k": "v"}
+
+
+def test_parse_judge_response_passes_through_valid_payload() -> None:
+    """``parse_judge_response`` returns the parsed object on the happy path."""
+    response = Response(
+        text='{"score": 0.7}',
+        model="judge",
+        provider="fake",
+        finish_reason="end_turn",
+    )
+
+    assert parse_judge_response(response) == {"score": 0.7}
+
+
+def test_parse_judge_response_flags_truncation() -> None:
+    """A ``max_tokens`` finish reason produces a truncation-specific message."""
+    response = Response(
+        text='{"claims": [{"text": "a", "supported": tru',  # cut mid-token
+        model="judge",
+        provider="fake",
+        finish_reason="max_tokens",
+    )
+
+    with pytest.raises(MetricError, match="truncated"):
+        parse_judge_response(response)
+
+
+def test_parse_judge_response_passes_through_unrelated_errors() -> None:
+    """Errors unrelated to truncation surface unchanged."""
+    response = Response(
+        text="not json at all",
+        model="judge",
+        provider="fake",
+        finish_reason="end_turn",
+    )
+
+    with pytest.raises(MetricError, match="valid JSON object"):
+        parse_judge_response(response)

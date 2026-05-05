@@ -6,7 +6,7 @@ from astraeval.core.types import Response
 from astraeval.datasets.sample import Sample
 from astraeval.exceptions import MetricError
 from astraeval.metrics.base import Metric, MetricResult
-from astraeval.metrics.llm_judge import LLMJudge, parse_json_object
+from astraeval.metrics.llm_judge import LLMJudge, parse_judge_response
 
 _PROMPT_TEMPLATE = """\
 You are evaluating whether an answer addresses the user's question.
@@ -59,7 +59,7 @@ class AnswerRelevance(Metric):
             non-numeric.
         """
         prompt = _PROMPT_TEMPLATE.format(question=sample.input, answer=response.text)
-        payload = parse_json_object(self._judge.ask(prompt).text)
+        payload = parse_judge_response(self._judge.ask(prompt))
 
         raw_score = payload.get("score")
         if not isinstance(raw_score, (int, float)) or isinstance(raw_score, bool):

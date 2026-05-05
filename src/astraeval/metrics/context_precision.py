@@ -8,7 +8,7 @@ from astraeval.core.types import Response
 from astraeval.datasets.sample import Sample
 from astraeval.exceptions import MetricError
 from astraeval.metrics.base import Metric, MetricResult
-from astraeval.metrics.llm_judge import LLMJudge, parse_json_object
+from astraeval.metrics.llm_judge import LLMJudge, parse_judge_response
 
 _PROMPT_TEMPLATE = """\
 You are evaluating the quality of a retrieval system. For each context \
@@ -79,7 +79,7 @@ class ContextPrecision(Metric):
             answer=response.text,
             chunks=chunks_block,
         )
-        payload = parse_json_object(self._judge.ask(prompt).text)
+        payload = parse_judge_response(self._judge.ask(prompt))
         chunks = payload.get("chunks")
         if not isinstance(chunks, list) or not chunks:
             raise MetricError("Judge response is missing a non-empty 'chunks' list.")

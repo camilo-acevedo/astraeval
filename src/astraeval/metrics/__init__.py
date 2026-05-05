@@ -6,7 +6,7 @@ from astraeval.metrics.context_precision import ContextPrecision
 from astraeval.metrics.exact_match import ExactMatch
 from astraeval.metrics.faithfulness import Faithfulness
 from astraeval.metrics.hallucination import HallucinationFlag
-from astraeval.metrics.llm_judge import LLMJudge, parse_json_object
+from astraeval.metrics.llm_judge import LLMJudge, parse_json_object, parse_judge_response
 
 __all__ = [
     "AnswerRelevance",
@@ -18,4 +18,5 @@ __all__ = [
     "Metric",
     "MetricResult",
     "parse_json_object",
+    "parse_judge_response",
 ]

@@ -10,6 +10,8 @@ from astraeval.core.types import Response
 from astraeval.exceptions import MetricError
 from astraeval.providers.base import Provider
 
+_TRUNCATED_FINISH_REASONS = frozenset({"max_tokens", "length"})
+
 
 class LLMJudge:
     """Thin wrapper around a :class:`Provider` configured for repeated judge calls.
@@ -76,27 +78,122 @@ class LLMJudge:
 
 
 def parse_json_object(text: str) -> dict[str, Any]:
-    """Parse a JSON object out of LLM output, tolerating markdown code fences.
+    """Parse a JSON object out of LLM output, tolerating fences and prose.
 
-    LLMs frequently wrap JSON inside triple-backtick fences even when asked
-    not to. This helper strips a single surrounding fence (with or without a
-    language tag), then defers to :func:`json.loads`.
+    Real-world LLMs sometimes break the "JSON only" instruction. This helper
+    is forgiving: it strips a surrounding triple-backtick fence, then tries
+    a direct parse, and on failure falls back to extracting the first
+    balanced ``{...}`` block and parsing that. Only a top-level JSON
+    *object* (mapping) is accepted; arrays, strings, and scalars raise.
 
     :param text: Raw text returned by an LLM judge.
     :type text: str
     :returns: Parsed mapping representing the JSON object.
     :rtype: dict[str, Any]
-    :raises astraeval.exceptions.MetricError: When the text does not parse
-        as JSON or parses to a non-object value.
+    :raises astraeval.exceptions.MetricError: When no JSON object can be
+        recovered from the text.
     """
     cleaned = _strip_code_fence(text).strip()
+
+    direct = _try_parse_object(cleaned)
+    if direct is not None:
+        return direct
+
+    extracted = _extract_first_object(cleaned)
+    if extracted is not None:
+        from_block = _try_parse_object(extracted)
+        if from_block is not None:
+            return from_block
+
+    snippet = cleaned if len(cleaned) <= 200 else cleaned[:200] + "..."
+    raise MetricError(f"Judge did not return a valid JSON object. First 200 chars: {snippet!r}")
+
+
+def parse_judge_response(response: Response) -> dict[str, Any]:
+    """Parse the JSON payload from a judge :class:`Response` with truncation context.
+
+    Wraps :func:`parse_json_object` and, when the underlying provider
+    truncated the output (``finish_reason`` of ``"max_tokens"`` or
+    ``"length"``), rewrites the error to name the cause explicitly so the
+    caller knows the fix is to raise the judge's token budget rather than
+    debug a malformed prompt.
+
+    :param response: Response returned by :meth:`LLMJudge.ask`.
+    :type response: Response
+    :returns: Parsed mapping representing the JSON object.
+    :rtype: dict[str, Any]
+    :raises astraeval.exceptions.MetricError: When the payload cannot be
+        recovered. The message identifies truncation when applicable.
+    """
     try:
-        result = json.loads(cleaned)
-    except json.JSONDecodeError as exc:
-        raise MetricError(f"Judge did not return valid JSON: {exc.msg}") from exc
+        return parse_json_object(response.text)
+    except MetricError as exc:
+        if response.finish_reason in _TRUNCATED_FINISH_REASONS:
+            raise MetricError(
+                f"Judge response was truncated "
+                f"(finish_reason={response.finish_reason!r}); "
+                f"increase the judge's 'max_tokens' budget. "
+                f"Underlying parse error: {exc}"
+            ) from exc
+        raise
+
+
+def _try_parse_object(text: str) -> dict[str, Any] | None:
+    """Return a parsed JSON object from ``text``, or ``None`` if not parseable.
+
+    :param text: Candidate JSON text.
+    :type text: str
+    :returns: The parsed mapping, or ``None`` when the input is invalid JSON
+        or parses to a non-object value.
+    :rtype: dict[str, Any] | None
+    """
+    try:
+        result = json.loads(text)
+    except json.JSONDecodeError:
+        return None
     if not isinstance(result, dict):
-        raise MetricError(f"Judge returned non-object JSON of type {type(result).__name__}.")
+        return None
     return result
+
+
+def _extract_first_object(text: str) -> str | None:
+    """Return the first balanced ``{...}`` substring of ``text``.
+
+    Walks the string with brace-depth tracking that ignores braces inside
+    JSON string literals (handling escape sequences). Returns ``None`` when
+    no balanced object is found.
+
+    :param text: Source text potentially containing prose around JSON.
+    :type text: str
+    :returns: The first balanced object substring, or ``None``.
+    :rtype: str | None
+    """
+    start = text.find("{")
+    if start == -1:
+        return None
+    depth = 0
+    in_string = False
+    escape = False
+    for i in range(start, len(text)):
+        ch = text[i]
+        if escape:
+            escape = False
+            continue
+        if ch == "\\":
+            escape = True
+            continue
+        if ch == '"':
+            in_string = not in_string
+            continue
+        if in_string:
+            continue
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                return text[start : i + 1]
+    return None
 
 
 def _strip_code_fence(text: str) -> str:

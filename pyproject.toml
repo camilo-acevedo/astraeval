@@ -1,6 +1,6 @@
 [project]
 name = "astraeval"
-version = "0.6.0"
+version = "0.6.1"
 description = "Astraeval: reproducible LLM evaluation harness with run manifests, prompt hashing, and SQLite caching."
 readme = "README.md"
 license = { file = "LICENSE" }

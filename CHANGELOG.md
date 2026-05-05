@@ -5,6 +5,38 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.1] - 2026-05-04
+
+Robustness pass for LLM-as-judge metrics: tolerate noisy judge output and
+surface truncation as a distinct, actionable error.
+
+### Added
+
+- `astraeval.metrics.parse_judge_response(response)` — wraps
+  `parse_json_object` and rewrites the error message when the underlying
+  provider truncated the output (`finish_reason` of `"max_tokens"` or
+  `"length"`), naming the cause so the fix (raise the judge's
+  `max_tokens`) is obvious. `Faithfulness`, `AnswerRelevance`, and
+  `ContextPrecision` now use it internally.
+
+### Changed
+
+- `astraeval.metrics.parse_json_object` is now tolerant of judges that
+  ignore the "JSON only" instruction. When a direct parse fails, the
+  helper extracts the first balanced `{...}` block from the text and
+  parses that. Brace tracking ignores braces inside JSON string literals
+  so quoted braces no longer derail the scan. Failure mode includes a
+  200-character snippet of the offending text in the error to make
+  debugging quick.
+
+### Fixed
+
+- `Faithfulness` against verbose answers no longer crashes the run when
+  the judge's response is cut by `max_tokens`. The metric still raises,
+  but the message now identifies truncation explicitly instead of
+  reporting an opaque "Expecting ',' delimiter" JSON error from the
+  middle of the cut payload.
+
 ## [0.6.0] - 2026-05-04
 
 First public PyPI release. Pre-1.0 API audit pass: tightens public surface,
